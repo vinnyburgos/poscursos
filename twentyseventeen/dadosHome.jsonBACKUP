@@ -1,0 +1,464 @@
+{
+    "graduacao": [
+        {
+            "tipo": "Graduação",
+            "curso": "Administração",
+            "modalidade": "EAD",
+            "mnemonico": "DAM",
+            "semestres": 8,
+            "precos": "215.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Administração",
+            "modalidade": "Presencial",
+            "mnemonico": "ADD",
+            "semestres": 8,
+            "precos": "556.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Análise e Desenvolvimento de Sistemas",
+            "modalidade": "EAD",
+            "mnemonico": "DAD",
+            "semestres": 5,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Análise e Desenvolvimento de Sistemas",
+            "modalidade": "Presencial",
+            "mnemonico": "ADS",
+            "semestres": 5,
+            "precos": "587.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Arquitetura e Urbanismo",
+            "modalidade": "Presencial",
+            "mnemonico": "ARQ",
+            "semestres": 10,
+            "precos": "681.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Automação Industrial",
+            "modalidade": "EAD",
+            "mnemonico": "DAI",
+            "semestres": 6,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Bacharelado em Sistema de Informação",
+            "modalidade": "EAD",
+            "mnemonico": "DSI",
+            "semestres": 8,
+            "precos": "215.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Bacharelado em Teologia",
+            "modalidade": "EAD",
+            "mnemonico": "DBT",
+            "semestres": 7,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Biomedicina",
+            "modalidade": "Presencial",
+            "mnemonico": "BME",
+            "semestres": 8,
+            "precos": "769.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Ciência de Dados e Inteligência Artificial",
+            "modalidade": "EAD",
+            "mnemonico": "TBD",
+            "semestres": 5,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Ciências Contábeis",
+            "modalidade": "EAD",
+            "mnemonico": "DCO",
+            "semestres": 8,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Ciências Contábeis",
+            "modalidade": "Presencial",
+            "mnemonico": "COB",
+            "semestres": 8,
+            "precos": "556.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Direito",
+            "modalidade": "Presencial",
+            "mnemonico": "JUR",
+            "semestres": 10,
+            "precos": "813.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Educação Física (Bacharelado)",
+            "modalidade": "EAD",
+            "mnemonico": "DBE",
+            "semestres": 8,
+            "precos": "260.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Presidente Vargas), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Educação Física (Bacharelado)",
+            "modalidade": "Presencial",
+            "mnemonico": "BEF",
+            "semestres": 8,
+            "precos": "723.00",
+            "campus": "Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Educação Física (Licenciatura)",
+            "modalidade": "EAD",
+            "mnemonico": "DEF",
+            "semestres": 8,
+            "precos": "260.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Enfermagem",
+            "modalidade": "Presencial",
+            "mnemonico": "ENF",
+            "semestres": 10,
+            "precos": "899.00",
+            "campus": "Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Engenharia Civil",
+            "modalidade": "Presencial",
+            "mnemonico": "CIV",
+            "semestres": 10,
+            "precos": "693.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Engenharia de Computação",
+            "modalidade": "Presencial",
+            "mnemonico": "ECM",
+            "semestres": 10,
+            "precos": "693.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Engenharia de Produção",
+            "modalidade": "EAD",
+            "mnemonico": "DEP",
+            "semestres": 10,
+            "precos": "250.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Engenharia Elétrica",
+            "modalidade": "Presencial",
+            "mnemonico": "ELT",
+            "semestres": 10,
+            "precos": "693.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Engenharia Mecânica",
+            "modalidade": "Presencial",
+            "mnemonico": "MEC",
+            "semestres": 10,
+            "precos": "693.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Estética e Cosmética",
+            "modalidade": "Presencial",
+            "mnemonico": "EST",
+            "semestres": 5,
+            "precos": "626.00",
+            "campus": "Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Farmácia",
+            "modalidade": "Presencial",
+            "mnemonico": "FAR",
+            "semestres": 10,
+            "precos": "725.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Fisioterapia",
+            "modalidade": "Presencial",
+            "mnemonico": "FTO",
+            "semestres": 10,
+            "precos": "824.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Fonoaudiologia",
+            "modalidade": "Presencial",
+            "mnemonico": "FON",
+            "semestres": 8,
+            "precos": "599.00",
+            "campus": "Campus Bonsucesso (Av. Paris)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Gastronomia",
+            "modalidade": "Presencial",
+            "mnemonico": "GAS",
+            "semestres": 4,
+            "precos": "912.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Gestão Comercial",
+            "modalidade": "EAD",
+            "mnemonico": "DGC",
+            "semestres": 4,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Gestão de Negócios e Inovação",
+            "modalidade": "EAD",
+            "mnemonico": "DNI",
+            "semestres": 4,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Gestão de Recursos Humanos",
+            "modalidade": "EAD",
+            "mnemonico": "DRH",
+            "semestres": 4,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Gestão de Recursos Humanos",
+            "modalidade": "Presencial",
+            "mnemonico": "GRH",
+            "semestres": 4,
+            "precos": "492.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Gestão Financeira",
+            "modalidade": "EAD",
+            "mnemonico": "DGF",
+            "semestres": 4,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Gestão Hospitalar",
+            "modalidade": "EAD",
+            "mnemonico": "DGH",
+            "semestres": 6,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Gestão Pública",
+            "modalidade": "EAD",
+            "mnemonico": "DGP",
+            "semestres": 4,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "História (Licenciatura)",
+            "modalidade": "EAD",
+            "mnemonico": "DLH",
+            "semestres": 8,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Jornalismo",
+            "modalidade": "Presencial",
+            "mnemonico": "JOR",
+            "semestres": 8,
+            "precos": "581.00",
+            "campus": "Campus Bonsucesso (Av. Paris)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Logística",
+            "modalidade": "EAD",
+            "mnemonico": "DLO",
+            "semestres": 4,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Logística",
+            "modalidade": "Presencial",
+            "mnemonico": "TLG",
+            "semestres": 4,
+            "precos": "492.00",
+            "campus": "Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Marketing",
+            "modalidade": "EAD",
+            "mnemonico": "DMK",
+            "semestres": 4,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Medicina Veterinária",
+            "modalidade": "Presencial",
+            "mnemonico": "BMV",
+            "semestres": 10,
+            "precos": "1090.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Nutrição",
+            "modalidade": "Presencial",
+            "mnemonico": "NUT",
+            "semestres": 8,
+            "precos": "787.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Odontologia",
+            "modalidade": "Presencial",
+            "mnemonico": "ODO",
+            "semestres": 9,
+            "precos": "1979.00",
+            "campus": "Campus Bonsucesso (Av. Paris)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Pedagogia",
+            "modalidade": "EAD",
+            "mnemonico": "DPD",
+            "semestres": 8,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Português\/Literatura",
+            "modalidade": "EAD",
+            "mnemonico": "DLL",
+            "semestres": 8,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Processos Gerenciais",
+            "modalidade": "EAD",
+            "mnemonico": "DPG",
+            "semestres": 4,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Psicologia",
+            "modalidade": "Presencial",
+            "mnemonico": "PSI",
+            "semestres": 10,
+            "precos": "949.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Publicidade e Propaganda",
+            "modalidade": "Presencial",
+            "mnemonico": "PUB",
+            "semestres": 8,
+            "precos": "581.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Redes de Computadores",
+            "modalidade": "EAD",
+            "mnemonico": "DRC",
+            "semestres": 5,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Arthur Pires), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Jardim Meriti (R. da Matriz), Polo Jardim Paulista (Alameda Jaú), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Serviço Social",
+            "modalidade": "EAD",
+            "mnemonico": "DSS",
+            "semestres": 7,
+            "precos": "169.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo), Polo Barra da Tijuca (Città), Polo Campo Grande (Estr. do Mendanha), Polo Centro (Av. Carmela Dutra), Polo Centro (Av. Enarni do Amaral Peixoto), Polo Centro (Av. Paulino Rodrigues de Souza), Polo Centro (Av. Presidente Vargas), Polo Centro (Praça Heitor Vale), Polo Centro (R. Camerino), Polo Centro (R. Francisca Melo), Polo Centro (R. Silva Jardim), Polo Encantado ( R. Clarimundo de Melo), Polo Guaratiba (R. Canoanã), Polo Jardim Imperial (Av. 22 de Maio), Polo Pedra de Guaratiba (Estr. da Matriz), Polo Piabetá (R. Brasil), Polo Raul Veiga (R. Alagoas), Polo Realengo (Estr. do Realengo), Polo Santa Cruz (R. Lopes Moura), Polo São Bernardo (R. Mauá), Polo São Cristovão (R. Bela), Polo Taquara (R. Apiacás), Polo Tijuca (R. General Roca), Polo Vila da Penha (Av. Meriti), Polo Vilar dos Teles (R. Aldenor Ribeiro de Matos), Polo Xerém (Estr. Carlos Mateus), São Gonçalo Centro"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Superior de Tecnologia em Gestão da Tecnologia da Informação",
+            "modalidade": "Presencial",
+            "mnemonico": "SGI",
+            "semestres": 5,
+            "precos": "550.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        },
+        {
+            "tipo": "Graduação",
+            "curso": "Terapia ocupacional",
+            "modalidade": "Presencial",
+            "mnemonico": "BTO",
+            "semestres": 8,
+            "precos": "714.00",
+            "campus": "Campus Bangu (Shopping), Campus Bonsucesso (Av. Paris), Campus Campo Grande (Av. Cesário de Melo)"
+        }
+    ]
+}
+// Atualizado em: 22/10/2025 11:09:58

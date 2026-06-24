@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos UNISUAM - Embed HubSpot</title>
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <style>
+        /* Reset básico */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Ubuntu', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .center {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .bgHome {
+            background-color: #2196f3;
+            background-size: cover;
+            background-position: center;
+            padding: 60px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .titleHome {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .subTitleHome {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .modalidadeTop {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        /* Barra de busca */
+        .findBar {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .findCurso {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btnFindCurso {
+            background: #2196f3;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btnFindCurso:hover {
+            background: #1976d2;
+        }
+
+        .findInterBar {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Filtros */
+        .filtrosBar {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .innerFiltros {
+            padding: 20px;
+        }
+
+        .lineOne {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .filtrarPor {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .limparFiltros {
+            background: #f44336;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .lineTwo {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .innerSelect {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .innerSelect label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .innerSelect select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* Botões mobile */
+        .mobFiltros, .btnRedcolher {
+            display: none;
+            background: #2196f3;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        /* Grid de cursos */
+        .encontreCurso {
+            margin-bottom: 50px;
+        }
+
+        .box-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .box-item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .box-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .boxColor {
+            height: 8px;
+            width: 100%;
+        }
+
+        .bgGreen {
+            background: linear-gradient(90deg, #4caf50 0%, #81c784 100%);
+        }
+
+        .bgRed {
+            background: linear-gradient(90deg, #f44336 0%, #ef5350 100%);
+        }
+
+        .seloType {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+        .colorRed {
+            background: #f44336;
+        }
+
+        .colorGreen {
+            background: #4caf50;
+        }
+
+        .innerMod {
+            display: inline-block;
+            margin: 60px 20px 10px 20px;
+            border-radius: 15px;
+            padding: 5px 15px;
+            border: 1px solid #4caf50;
+            background: rgba(76,175,80,0.1);
+        }
+
+        .innerRed {
+            border-color: #f44336;
+            background: rgba(244,67,54,0.1);
+        }
+
+        .categoria {
+            color: #4caf50;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .innerRed .categoria {
+            color: #f44336;
+        }
+
+        .titleBox {
+            padding: 0 20px 10px 20px;
+            font-size: 15px;
+            line-height: 16px;
+            margin: 0;
+        }
+
+        .nameCurso {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .apiGets {
+            padding: 0 20px 20px 20px;
+        }
+
+        .partir {
+            font-size: 14px;
+            margin: 10px 0 5px 0;
+            font-weight: 600;
+        }
+
+        .valorSDesconto {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .valorCDesconto {
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .ateFinal {
+            font-size: 12px;
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .wrapThings {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .carga, .unidades {
+            font-size: 12px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .conteudoBox, .unidadeContent {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .innerInscreva {
+            padding: 0 20px 20px 20px;
+        }
+
+        .btnInscreva {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .btnInscreva:hover {
+            background: #388e3c;
+            transform: translateY(-2px);
+        }
+
+        .btnVerMaisCursos {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            display: block;
+            margin: 0 auto;
+            transition: background 0.3s;
+        }
+
+        .btnVerMaisCursos:hover {
+            background: #1976d2;
+        }
+
+        /* Top 10 */
+        .top10 {
+            background: #f9f9f9;
+            padding: 50px 0;
+            margin-bottom: 50px;
+        }
+
+        .top10 h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .comBarra::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #2196f3;
+            margin: 10px auto 0;
+        }
+
+        .top10Sw {
+            position: relative;
+        }
+
+        .innerProcurado {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .wrapProcurado {
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .seloTypeTop10 {
+            background: #4caf50;
+            color: white;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 3px;
+            text-transform: uppercase;
+            align-self: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .innerModTop10 {
+            margin-bottom: 15px;
+        }
+
+        .categoriaTop {
+            background: rgba(76,175,80,0.1);
+            color: #4caf50;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .categoriaTop.presencial {
+            background: rgba(76,175,80,0.1);
+            color: #4caf50;
+        }
+
+        .titleTop10 {
+            font-size: 17px;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .course-thumbnail {
+            margin: 15px 0;
+        }
+
+        .course-thumbnail img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .cargaHorariaTop {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .course-price {
+            font-size: 14px;
+            font-weight: bold;
+            color: #4caf50;
+        }
+
+        .clickTop {
+            text-decoration: none;
+            color: inherit;
+            height: 100%;
+            display: block;
+        }
+
+        .vemAiText {
+            background: #f44336;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .buttonsSwiper {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: 2px solid #2196f3;
+            color: #2196f3;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+
+        .buttonsSwiper:hover {
+            background: #2196f3;
+            color: white;
+        }
+
+        .button-next {
+            right: -25px;
+        }
+
+        .button-prev {
+            left: -25px;
+        }
+
+        /* Modal */
+        #modalCalculadora {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #modalCalculadora > div {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 700px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        #modalCalculadora button:first-of-type {
+            position: absolute;
+            top: 0px;
+            right: -20px;
+            background: none;
+            border: none;
+            color: #333;
+            font-size: 24px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        #modalCalculadora h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            line-height: 1.2;
+            color: #2196f3;
+        }
+
+        #modalCalculadora h2 {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            color: #e91e63;
+            line-height: 1.2;
+        }
+
+        #modalCalculadora h3 {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0 0 15px 0;
+            line-height: 1.2;
+            color: #2196f3;
+        }
+
+        #modalCalculadora p {
+            font-size: 18px;
+            margin: 0 0 5px 0;
+            line-height: 1.4;
+            color: #555;
+        }
+
+        #modalCalculadora .btn {
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            line-height: 19px;
+            max-width: 300px;
+        }
+
+        #modalCalculadora .btn:hover {
+            background-color: #e91e63 !important;
+            transform: translateY(-2px);
+        }
+
+        /* Utilitários */
+        .selecionaCategoria {
+            opacity: 0;
+            position: absolute;
+            z-index: -999;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .titleHome {
+                font-size: 32px;
+            }
+
+            .findBar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .lineTwo {
+                flex-direction: column;
+            }
+
+            .innerSelect {
+                min-width: auto;
+            }
+
+            .box-container {
+                grid-template-columns: 1fr;
+            }
+
+            .mobFiltros, .btnRedcolher {
+                display: block;
+            }
+
+            .lineTwo {
+                display: none;
+            }
+
+            .lineTwo.active {
+                display: flex;
+                flex-direction: column;
+            }
+
+            #modalCalculadora > div {
+                padding: 30px 20px;
+                margin: 20px;
+                max-width: 400px;
+            }
+
+            #modalCalculadora h1,
+            #modalCalculadora h2 {
+                font-size: 26px !important;
+            }
+
+            #modalCalculadora h3 {
+                font-size: 22px !important;
+            }
+
+            #modalCalculadora p {
+                font-size: 16px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .titleHome {
+                font-size: 24px;
+            }
+
+            #modalCalculadora > div {
+                padding: 25px 15px;
+                margin: 15px;
+            }
+
+            #modalCalculadora h1,
+            #modalCalculadora h2 {
+                font-size: 22px !important;
+            }
+
+            #modalCalculadora h3 {
+                font-size: 18px !important;
+            }
+
+            #modalCalculadora p {
+                font-size: 14px !important;
+            }
+
+            #modalCalculadora button {
+                padding: 12px 30px !important;
+                font-size: 14px !important;
+            }
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-top: 2px solid #2196f3;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <section class="bgHome" id="bgHome">
+        <div class="wrapInfos">
+            <p class="modalidadeTop">Graduação</p>
+            <h1 class="titleHome">FAÇA SUA GRADUAÇÃO NA UNISUAM</h1>
+            <p class="subTitleHome">Escolha entre mais de 30 cursos de graduação</p>
+        </div>
+    </section>
+
+    <!-- Barra de busca -->
+    <div class="center">
+        <div class="findBar" id="findBar">
+            <img class="findInterBar" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExIDJDMTUuOTcgMiAyMCA2LjAzIDIwIDExQzIwIDEzLjEyIDE5LjMzIDE1LjA3IDE4LjE0IDE2LjZMMjIuNzEgMjEuMTdDMjMuMSAyMS41NiAyMy4xIDIyLjIgMjIuNzEgMjIuNTlDMjIuMzIgMjIuOTggMjEuNjkgMjIuOTggMjEuMyAyMi41OUwxNi43MyAxOC4wMkMxNS4yNiAxOS4xOSAxMy4zMSAyMCAxMSAyMEM2LjAzIDIwIDIgMTUuOTcgMiAxMUMyIDYuMDMgNi4wMyAyIDExIDJaTTExIDRDNy4xNCA0IDQgNy4xNCA0IDExQzQgMTQuODYgNy4xNCAxOCAxMSAxOEMxNC44NiAxOCAxOCAxNC44NiAxOCAxMUMxOCA3LjE0IDE0Ljg2IDQgMTEgNFoiIGZpbGw9IiM2NjY2NjYiLz4KPC9zdmc+Cg==" alt="Buscar">
+            <input type="text" id="findCurso" class="findCurso" placeholder="PESQUISE UM CURSO">
+            <div class="btnFindCurso btn" id="btnFindCurso">PESQUISAR</div>
+
+            <div class="mobFiltros" id="mobFiltros">
+                <span>FILTROS</span>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filtrosBar">
+            <div class="innerFiltros">
+                <div class="lineOne">
+                    <p class="filtrarPor">FILTRAR POR:</p>
+                    <button class="limparFiltros btn" id="limparFiltros">
+                        LIMPAR FILTROS
+                    </button>
+                </div>
+                <div class="lineTwo">
+                    <div class="innerSelect">
+                        <label for="areaInteresse" class="interesse">Área de Interesse</label>
+                        <select name="areaInteresse" id="areaInteresse">
+                            <option value="">Todas</option>
+                        </select>
+                    </div>
+
+                    <div class="innerSelect">
+                        <label for="modalidade" class="modalidade">Modalidade de Ensino</label>
+                        <select name="modalidade" id="modalidade">
+                            <option value="">Todas</option>
+                        </select>
+                    </div>
+
+                    <div class="innerSelect selectUnidade">
+                        <label for="unidade" class="unidade">Unidade</label>
+                        <select name="unidade" id="unidade">
+                            <option value="">Todas</option>
+                        </select>
+                    </div>
+
+                    <div class="btnRedcolher">
+                        RECOLHER
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção de cursos -->
+    <section class="encontreCurso">
+        <div class="center">
+            <div class="box-container" id="boxContainer">
+                <div class="loading">Carregando cursos...</div>
+            </div>
+            <div class="btnVerMaisCursos btn" id="btnVerMaisCursos" style="display: none;">VER MAIS +</div>
+        </div>
+    </section>
+
+    <!-- Top 10 -->
+    <section class="top10">
+        <div class="center">
+            <h2 class="comBarra">Top Cursos mais procurados</h2>
+            <div class="swiper top10Sw">
+                <div class="swiper-wrapper" id="top10Container">
+                    <!-- Slides serão carregados via JavaScript -->
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="button-next buttonsSwiper">→</div>
+            <div class="button-prev buttonsSwiper">←</div>
+        </div>
+    </section>
+
+    <!-- Modal da Calculadora -->
+    <div id="modalCalculadora">
+        <div>
+            <button onclick="fecharModalCalculadora()">×</button>
+            <div>
+                <h1>
+                    USE A NOTA DO <strong style="color: #e91e63; background-color: rgba(30, 111, 233, 0.3); padding: 2px 6px; border-radius: 4px;">ENEM</strong> PARA GARANTIR SUA VAGA!<br>
+                </h1>
+                
+                <h2>
+                    <strong style="color: #e91e63; background-color: rgba(30, 111, 233, 0.3); padding: 2px 6px; border-radius: 4px;">DESCONTO + PREÇO FIXO!</strong>
+                </h2>
+                
+                <p>Últimas semanas para você se matricular na UNISUAM</p>
+                <p style="margin-bottom: 25px;">
+                    com até <strong style="color: #e91e63; background-color: rgba(233,30,99,0.1); padding: 2px 6px; border-radius: 4px;">85% de desconto!</strong>
+                </p>
+                
+                <h3>
+                    <span style="color: #e91e63;">ESCOLHA O CURSO</span><br>
+                    E CALCULE O SEU DESCONTO AGORA!<br>
+                </h3><br>
+            
+                <button onclick="fecharModalCalculadora()" class="btn btnInscreva">
+                    CALCULAR
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variáveis globais
+        let cursosData = [];
+        let cursosExibidos = 12;
+        let swiper;
+        const API_URL = 'https://cursos.unisuam.edu.br/wp-content/themes/twentyseventeen/getAPICards.php';
+
+        // Configurações de sessão
+        const formasIngressoValidas = ['enem', 'segunda_graduacao', 'transferencia'];
+        let formaIngresso = '';
+
+        // Detectar forma de ingresso na URL
+        function detectarFormaIngresso() {
+            const urlParams = new URLSearchParams(window.location.search);
+            for (const forma of formasIngressoValidas) {
+                if (urlParams.has(forma) || window.location.href.includes(forma)) {
+                    formaIngresso = forma;
+                    sessionStorage.setItem('forma_ingresso', forma);
+                    break;
+                }
+            }
+            
+            // Se não encontrou na URL, verificar sessão
+            if (!formaIngresso && sessionStorage.getItem('forma_ingresso')) {
+                formaIngresso = sessionStorage.getItem('forma_ingresso');
+            }
+        }
+
+        // Adicionar parâmetro de forma de ingresso aos links
+        function adicionarFormaIngressoLink(url) {
+            if (formaIngresso && url && url !== '#') {
+                if (url.includes('?')) {
+                    return url + '&' + formaIngresso;
+                } else {
+                    return url + '?' + formaIngresso;
+                }
+            }
+            return url;
+        }
+
+        // Carregar dados da API
+        async function carregarCursos() {
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                
+                // Se vier agrupado por tipo, pegar apenas graduação
+                cursosData = data.graduacao || data;
+                
+                if (Array.isArray(cursosData)) {
+                    renderizarCursos();
+                    popularFiltros();
+                    carregarTop10();
+                } else {
+                    throw new Error('Dados inválidos recebidos da API');
+                }
+            } catch (error) {
+                console.error('Erro ao carregar cursos:', error);
+                document.getElementById('boxContainer').innerHTML = '<p>Erro ao carregar cursos. Tente novamente mais tarde.</p>';
+            }
+        }
+
+        // Renderizar cards de cursos
+        function renderizarCursos(cursosFiltrados = null) {
+            const container = document.getElementById('boxContainer');
+            const cursos = cursosFiltrados || cursosData;
+            
+            if (!cursos || cursos.length === 0) {
+                container.innerHTML = '<p>Nenhum curso encontrado.</p>';
+                return;
+            }
+
+            const cursosParaExibir = cursos.slice(0, cursosExibidos);
+            
+            container.innerHTML = cursosParaExibir.map(curso => {
+                const modalidade = (curso.modalidade && (curso.modalidade.toLowerCase().includes('ead') || curso.modalidade.toLowerCase().includes('digital'))) ? 'Digital (EaD)' : 'Presencial';
+                const isDigital = modalidade === 'Digital (EaD)';
+                const corClasse = isDigital ? 'Red' : 'Green';
+                
+                let preco = '';
+                if (curso.precos && !isNaN(curso.precos)) {
+                    const valor = parseFloat(curso.precos);
+                    const valorIntegral = (valor * 2).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                    const valorDesconto = valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                    preco = `
+                        <span class="valorSDesconto">${valorIntegral}</span>
+                        <span class="dezoitoxSDesconto">&nbsp;por:</span>
+                        <div class="pula"></div>
+                        <span class="dozexCDesconto color${corClasse}">R$</span>
+                        <span class="valorCDesconto">${valorDesconto}</span>
+                    `;
+                }
+
+                let unidade = '';
+                if (curso.campus && !curso.campus.toLowerCase().includes('polo')) {
+                    const unidadeNome = curso.campus.replace(/campus/gi, '').replace(/\s*\(.*?\)\s*/g, '').trim();
+                    unidade = `
+                        <div class="wrapThings apenasPresencial">
+                            <h6 class="unidades color${corClasse}">Unidades:</h6>
+                            <div class="unidadeContent">${unidadeNome}</div>
+                        </div>
+                    `;
+                }
+
+                // Permalink básico (adaptar conforme necessário)
+                const permalink = adicionarFormaIngressoLink(`/graduacao/${curso.mnemonico || '#'}`);
+
+                return `
+                    <div class="box-item" data-mneumonico="${curso.mnemonico || ''}" data-modalidade="${modalidade}">
+                        <span class="selecionaCategoria">${curso.categoria || ''}</span>
+                        <div class="boxColor bg${corClasse}"></div>
+                        <p class="seloType color${corClasse}">${curso.tipo || 'GRADUAÇÃO'}</p>
+                        <div class="innerMod inner${corClasse}">
+                            <span class="categoria">${modalidade}</span>
+                        </div>
+                        <h3 class="titleBox">
+                            <a class="nameCurso" href="${permalink}">${curso.curso || curso.nome || ''}</a>
+                        </h3>
+                        <div class="apiGets">
+                            <p class="partir color${corClasse}">A partir de:</p>
+                            ${preco}
+                            <p class="ateFinal">até o final do curso</p>
+                            <div class="pula"></div>
+                            <div class="wrapThings">
+                                <h6 class="carga color${corClasse}">Duração:</h6>
+                                <p class="conteudoBox">
+                                    <span class="cargaHoraria">${curso.semestres || ''}</span>
+                                    <span> semestres</span>
+                                </p>
+                            </div>
+                            ${unidade}
+                        </div>
+                        <div class="innerInscreva">
+                            <a href="${permalink}" class="cursoPage">
+                                <div class="btnInscreva btn">SAIBA MAIS!</div>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Mostrar/ocultar botão "Ver mais"
+            const btnVerMais = document.getElementById('btnVerMaisCursos');
+            if (cursos.length > cursosExibidos) {
+                btnVerMais.style.display = 'block';
+            } else {
+                btnVerMais.style.display = 'none';
+            }
+        }
+
+        // Popular filtros
+        function popularFiltros() {
+            const areaSelect = document.getElementById('areaInteresse');
+            const modalidadeSelect = document.getElementById('modalidade');
+            const unidadeSelect = document.getElementById('unidade');
+
+            // Áreas de interesse (baseado nas categorias)
+            const areas = [...new Set(cursosData.map(curso => curso.categoria).filter(Boolean))];
+            areas.forEach(area => {
+                const option = document.createElement('option');
+                option.value = area;
+                option.textContent = area;
+                areaSelect.appendChild(option);
+            });
+
+            // Modalidades
+            const modalidades = [...new Set(cursosData.map(curso => {
+                return (curso.modalidade && (curso.modalidade.toLowerCase().includes('ead') || curso.modalidade.toLowerCase().includes('digital'))) ? 'Digital (EaD)' : 'Presencial';
+            }))];
+            modalidades.forEach(modalidade => {
+                const option = document.createElement('option');
+                option.value = modalidade;
+                option.textContent = modalidade;
+                modalidadeSelect.appendChild(option);
+            });
+
+            // Unidades
+            const unidades = [...new Set(cursosData.map(curso => {
+                if (curso.campus && !curso.campus.toLowerCase().includes('polo')) {
+                    return curso.campus.replace(/campus/gi, '').replace(/\s*\(.*?\)\s*/g, '').trim();
+                }
+                return null;
+            }).filter(Boolean))];
+            unidades.forEach(unidade => {
+                const option = document.createElement('option');
+                option.value = unidade;
+                option.textContent = unidade;
+                unidadeSelect.appendChild(option);
+            });
+        }
+
+        // Filtrar cursos
+        function filtrarCursos() {
+            const areaValue = document.getElementById('areaInteresse').value;
+            const modalidadeValue = document.getElementById('modalidade').value;
+            const unidadeValue = document.getElementById('unidade').value;
+            const buscaValue = document.getElementById('findCurso').value.toLowerCase();
+
+            let cursosFiltrados = cursosData.filter(curso => {
+                let passa = true;
+
+                // Filtro por área
+                if (areaValue && curso.categoria !== areaValue) {
+                    passa = false;
+                }
+
+                // Filtro por modalidade
+                if (modalidadeValue) {
+                    const modalidadeCurso = (curso.modalidade && (curso.modalidade.toLowerCase().includes('ead') || curso.modalidade.toLowerCase().includes('digital'))) ? 'Digital (EaD)' : 'Presencial';
+                    if (modalidadeCurso !== modalidadeValue) {
+                        passa = false;
+                    }
+                }
+
+                // Filtro por unidade
+                if (unidadeValue && curso.campus) {
+                    const unidadeCurso = curso.campus.replace(/campus/gi, '').replace(/\s*\(.*?\)\s*/g, '').trim();
+                    if (unidadeCurso !== unidadeValue) {
+                        passa = false;
+                    }
+                }
+
+                // Filtro por busca
+                if (buscaValue && !(curso.curso || curso.nome || '').toLowerCase().includes(buscaValue)) {
+                    passa = false;
+                }
+
+                return passa;
+            });
+
+            cursosExibidos = 12; // Reset para primeira página
+            renderizarCursos(cursosFiltrados);
+        }
+
+        // Carregar Top 10 (adaptado conforme necessário)
+        function carregarTop10() {
+            const container = document.getElementById('top10Container');
+            
+            // Top cursos mais procurados (você pode adaptar esta lógica)
+            const topCursos = cursosData.slice(0, 10); // Primeiros 10 por enquanto
+            
+            container.innerHTML = topCursos.map(curso => {
+                const modalidade = (curso.modalidade && (curso.modalidade.toLowerCase().includes('ead') || curso.modalidade.toLowerCase().includes('digital'))) ? 'Digital (EaD)' : 'Presencial';
+                const permalink = adicionarFormaIngressoLink(`/graduacao/${curso.mnemonico || '#'}`);
+                
+                return `
+                    <div class="swiper-slide innerProcurado">
+                        <a class="clickTop" href="${permalink}">
+                            <div class="wrapProcurado">
+                                <p class="seloTypeTop10">GRADUAÇÃO</p>
+                                <div class="innerModTop10">
+                                    <span class="categoriaTop ${modalidade === 'Presencial' ? 'presencial' : ''}">${modalidade}</span>
+                                </div>
+                                <h3 class="titleTop10">${curso.curso || curso.nome || ''}</h3>
+                                <div class="course-thumbnail">
+                                    <img src="https://cursos.unisuam.edu.br/wp-content/uploads/2025/07/imagem_assistente-social-1.png" alt="${curso.curso || curso.nome || ''}">
+                                </div>
+                                <p class="cargaHorariaTop">Duração: ${curso.semestres || '8'} semestres</p>
+                                <p class="course-price">
+                                    <span style="font-weight:600;">A partir de: R$</span>
+                                    <span class="valorTop10">${curso.precos ? parseFloat(curso.precos).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : ''}</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                `;
+            }).join('');
+
+            // Inicializar Swiper
+            initSwiper();
+        }
+
+        // Inicializar Swiper
+        function initSwiper() {
+            swiper = new Swiper(".top10Sw", {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                navigation: {
+                    nextEl: ".button-next",
+                    prevEl: ".button-prev",
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                breakpoints: {
+                    600: {
+                        slidesPerView: 3,
+                        spaceBetween: 50,
+                    },
+                },
+            });
+        }
+
+        // Modal da calculadora
+        function verificarCalculadoraURL() {
+            if (sessionStorage.getItem('modalCalculadoraExibido')) {
+                return;
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('calculadora') || window.location.href.includes('&calculadora')) {
+                document.getElementById('modalCalculadora').style.display = 'flex';
+                sessionStorage.setItem('modalCalculadoraExibido', 'true');
+            }
+        }
+
+        function fecharModalCalculadora() {
+            document.getElementById('modalCalculadora').style.display = 'none';
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            detectarFormaIngresso();
+            carregarCursos();
+            verificarCalculadoraURL();
+
+            // Filtros
+            document.getElementById('areaInteresse').addEventListener('change', filtrarCursos);
+            document.getElementById('modalidade').addEventListener('change', filtrarCursos);
+            document.getElementById('unidade').addEventListener('change', filtrarCursos);
+            
+            // Busca
+            document.getElementById('btnFindCurso').addEventListener('click', filtrarCursos);
+            document.getElementById('findCurso').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    filtrarCursos();
+                }
+            });
+
+            // Limpar filtros
+            document.getElementById('limparFiltros').addEventListener('click', function() {
+                document.getElementById('areaInteresse').value = '';
+                document.getElementById('modalidade').value = '';
+                document.getElementById('unidade').value = '';
+                document.getElementById('findCurso').value = '';
+                cursosExibidos = 12;
+                renderizarCursos();
+            });
+
+            // Ver mais cursos
+            document.getElementById('btnVerMaisCursos').addEventListener('click', function() {
+                cursosExibidos += 12;
+                renderizarCursos();
+            });
+
+            // Filtros mobile
+            document.getElementById('mobFiltros').addEventListener('click', function() {
+                document.querySelector('.lineTwo').classList.add('active');
+            });
+
+            document.querySelector('.btnRedcolher').addEventListener('click', function() {
+                document.querySelector('.lineTwo').classList.remove('active');
+            });
+        });
+
+        // Adicionar forma de ingresso a todos os links
+        function adicionarFormaIngressoTodosLinks() {
+            if (!formaIngresso) return;
+            
+            const links = document.querySelectorAll('a[href]');
+            links.forEach(link => {
+                let href = link.getAttribute('href');
+                if (href && href !== '#' && !href.startsWith('http') && !href.includes(formaIngresso)) {
+                    link.setAttribute('href', adicionarFormaIngressoLink(href));
+                }
+            });
+        }
+
+        // Interceptar cliques para adicionar parâmetros
+        document.addEventListener('click', function(e) {
+            if (!formaIngresso) return;
+            
+            if (e.target.tagName === 'A' || e.target.closest('a')) {
+                const link = e.target.tagName === 'A' ? e.target : e.target.closest('a');
+                let href = link.getAttribute('href');
+                
+                if (href && href !== '#' && !href.startsWith('http') && !href.includes(formaIngresso)) {
+                    link.setAttribute('href', adicionarFormaIngressoLink(href));
+                }
+            }
+        });
+    </script>
+</body>
+</html>

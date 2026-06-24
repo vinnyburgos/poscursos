@@ -1,0 +1,1063 @@
+.clear {
+    clear: both;
+}
+.center {
+    position: relative;
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+}
+.comBarra {
+    color: #2F3542;
+    font-family: Ubuntu;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+}
+.btn:hover {
+    transition: all .4s;
+    opacity: .8;
+}
+.innerInscreva {
+    position: absolute;
+    width: 83%;
+    bottom: 7%;
+    left: 0;
+    right: 0;
+    top: auto;
+}
+.btnInscreva {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    height: 45px;
+    text-align: center;
+    line-height: 40px;
+    left: 24px;
+    gap: 0px;
+    border-radius: 4px;
+    opacity: 0px;
+    color: #EF7D00;
+    font-weight: 600;
+    background: var(--Expand-Palete-US-Grayscale-US-White, #FFFFFF);
+    border: 2px solid var(--Brand-Colors-US-Orange-US-Brand-Orange-US, #EF7D00);
+    cursor: pointer;
+    transition: background-color .3s, color .3s;
+}
+.btnInscreva:hover {
+    background: var(--Brand-Colors-US-Orange-US-Brand-Orange-US, #EF7D00);
+    color: var(--Expand-Palete-US-Grayscale-US-White, #FFFFFF);
+    opacity: 1;
+}
+.comBarra:before {
+    position: relative;
+    content: '';
+    border-radius: 8px;
+    background-color: #EF7D00;
+    width: 70px;
+    height: 4px;
+    display: block;
+    top: -17px;
+    margin: 0 auto;
+}
+
+.bgHome {
+    padding: 10%;
+    color: #fff;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    height: 400px;
+}
+.encontreCurso {
+    padding-bottom: 60px;
+}
+.selecionados {
+    display: inline-block;
+}
+.modalidades {
+    position: relative;
+    display: block;
+    color: #fff;
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+    /* text-transform: uppercase; */
+    padding-top: 70px;
+    padding-bottom: 30px;
+    background: var(--Expand-Palete-US-Grayscale-US-Light-Gray-4-US, #F1F2F6);
+    text-align: center;
+}
+.wrapInfos {
+    margin-top: -30px;
+}
+.wrapContent {
+    padding-top: 50px;
+}
+.boxEnsino {
+    width: 28%;
+    max-width: 500px;
+    display: inline-block;
+    border-radius: 16px;
+    vertical-align: top;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    min-height: 300px;
+    margin-right: 20px;
+    text-align: center;
+}
+.boxEnsino > li {
+    list-style: none;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+.boxEnsino > li:before {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #fff;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    margin-left: -11px;
+    margin-top: 10px;
+}
+.boxEnsino1 {
+    background: linear-gradient(251deg, #6FC0CE 0%, #0F96AE 50%);
+}
+.BoxEnsino2 {
+    background: linear-gradient(251deg, #EF8FAF 0%, #E5457A 50%);
+}
+.boxEnsino3 {
+    background: linear-gradient(251deg, #B187BB 0%, #7D378D 50%);
+}
+.titleBoxEnsino {
+    color: #fff;
+    font-size: 25px;
+}
+.contentBoxEnsino {
+    font-size: 16px;
+}
+.modalidadeContent {
+    position: relative;
+    padding-top: 50px;
+    width: 95%;
+    max-width: 600px;
+    margin: 0 auto;
+    color: #57606F !important;
+    text-align: center;
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px; /* 166.667% */
+}
+.nossasUnidades {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding-top: 70px;
+    padding-bottom: 0;
+    text-align: center;
+}
+.boxUnidade {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 25%;
+    padding: 5px;
+    padding-top: 25px;
+    text-align: center;
+    height: 191px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    background: var(--Expand-Palete-US-Grayscale-US-Light-Gray-4-US, #F1F2F6);
+    margin-right: 15px;
+    margin-left: 15px;
+}
+.contentMod {
+    position: relative;
+    display: block;
+    width: 80%;
+    margin: 50px auto 30px auto;
+    color: #57606F;
+    max-width: 1030px;
+    line-height: 49px;
+    font-size: 24px;
+}
+.iconMapa {
+    width: 30px;
+    margin: 10px auto 0 auto;
+    z-index: 999;
+}
+.boxUnidade .unidade {
+    font-size: 12px;
+}
+.titleUnidade {
+    font-size: 25px;
+    margin-top: -55px;
+    margin-bottom: 5px;
+    z-index: 999;
+}
+.wrapPolosD {
+    width: 80%;
+    position: relative;
+    margin: 40px auto;
+    height: 80px;
+    overflow: hidden;
+    /* flex-shrink: 0; */
+    border-radius: 16px;
+    background: #F1F2F6;
+    cursor: pointer;
+    transition: all .4s;
+}
+.static {
+    position: absolute;
+    right: 50px;
+    top: 28px;
+    color: #57606F;
+    font-family: Ubuntu;
+    z-index: 999;
+}
+.wrapPolosD .titleUnidade {
+    position: relative;
+    float: left;
+    left: 80px;
+    top: 40px;
+}
+.wrapPolosD .iconMapa {
+    position: absolute;
+    left: 30px;
+    top: 18px;
+}
+.titleHome {
+    color: var(--Expand-Palete-US-Grayscale-US-White, #FFF);
+    font-family: Ubuntu;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: -70px;
+}
+.subTitleHome {
+    width: 95%;
+    max-width: 700px;
+    font-size: 20px;
+    margin-top: -24px;
+}
+.findBar {
+    padding-top: 40px;
+    border-radius: 16px;
+    background: var(--Expand-Palete-US-Grayscale-US-White, #FFF);
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.12);
+    z-index: 999;
+    position: relative;
+    top: -60px;
+    max-width: 850px;
+    height: 95px !important;
+    margin: 0 auto;
+    width: 95%;
+    padding-top: 21px;
+    padding-bottom: 0 !important;
+    text-align: center;
+}
+.findCurso {
+    position: relative !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    width: 70% !important;
+    border-radius: 56px !important;
+    border: 2px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0) !important;
+    background: var(--Expand-Palete-US-Grayscale-US-White, #FFF) !important;
+    padding-left: 40px !important;
+}
+.btnFindCurso {
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+    padding: 13px 20px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    gap: 8px;
+    border-radius: 48px;
+    background: var(--Brand-Colors-US-Orange-US-Brand-Orange-US, #EF7D00);
+    color: #fff;
+    cursor: pointer;
+    transition: all .4s;
+    margin-left: 20px;
+    position: relative;
+    top: 2px;
+}
+.filtrosBar {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 1000px;
+    margin: -35px auto 0 auto;
+}
+.lineOne {
+    width: 100%;
+    height: 36px;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: block;
+    color: #57606F;
+    z-index: 999;
+    position: relative;
+}
+.lineTwo {
+    position: relative;
+    top: -20px;
+    width: 100%;
+    height: 120px;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: block;
+}
+.filtrarPor {
+    position: relative;
+    float: left;
+    left: 2%;
+    font-size: 14px;
+    margin-bottom: 40px;
+}
+.limparFiltros {
+    position: relative;
+    float: right;
+    right: 5%;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #A4B0BE;
+}
+.limparFiltros:hover {
+    color: #57606F;
+}
+.btnVerMaisCursos {
+    display: block;
+    width: 160px;
+    padding: 16px 24px;
+    justify-content: center;
+    text-align: center;
+    margin: 40px auto;
+    border-radius: 32px;
+    border: 1px solid var(--Expand-Palete-US-Grayscale-US-Gray-US, #747D8C);
+    cursor: pointer;
+}
+.innerSelect {
+    position: relative;
+    display: inline-block;
+    width:50%;
+    margin-right: 20px;
+}
+.innerSelect select {
+    cursor: pointer;
+    border-radius: 56px;
+    width: 100%;
+    padding-left: 20px;
+    border: 2px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+    background: var(--Expand-Palete-US-Grayscale-US-White, #FFF);
+    padding-right: 40px; /* aumenta o espaço para a seta */
+    appearance: none; /* remove o estilo padrão */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='10' viewBox='0 0 16 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L8 8L15 1' stroke='%23747D8C' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+}
+.innerSelect label {
+    color: #57606F;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    position: relative;
+    top: 4px;
+    left: 22px;
+}
+.innerSelect.selectUnidade.disable {
+    opacity: 0.2;
+}
+.top10 {
+    position: relative;
+    padding: 50px;
+    padding-bottom: 30px;
+    background:  #002038;
+    color: #fff;
+    text-align: center;
+}
+.contentColumn {
+    line-height: 32px;
+}
+.sobrePos {
+    padding-top: 70px;
+    padding-bottom: 30px;
+}
+.sobrePos .column {
+    position: relative;
+    display: inline-block;
+    width: 25%;
+    margin: 50px 4%;
+    vertical-align: top;
+}
+.wrapIcon {
+    position: absolute;
+    width: 10%;
+    left: -40px;
+}
+.wrapIcon svg {
+    width: 100%;
+}
+.titleColumn {
+    position: relative;
+    width: 100%;
+    margin-top: -30px;
+}
+.titleColumn:nth-child(1) {
+    position: relative;
+    width: 90%;
+    margin-top: 0;
+}
+.innerProcurando {
+    width: 369px !important;
+    height: 153px !important;
+    flex-shrink: 0 !important;
+    border-radius: 0px 0px 24px 24px !important;
+    background: #0F96AE !important;
+}
+
+/* area de boxes  */
+.box-container {
+    text-align: center;
+    max-height: 1160px;
+    overflow-y: hidden;
+    transition: all .4s;
+    margin: 0 auto !important;
+}
+/* .box-container.active {
+    width: !important;
+    text-align: center;
+    max-height: 100%;
+    overflow-y: none;
+    transition: all .4s;
+} */
+.boxColor {
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 8px;
+    flex-shrink: 0;
+    border-radius: 8px 8px 0px 0px;
+}
+.bgGreen {
+    background: linear-gradient(262deg, #CFEAEF 0%, #0F96AE 50%);	
+}
+.bgRed {
+    background: linear-gradient(262deg, #FADAE4 0%, #E5457A 50%);
+}
+.bgPurple {
+    background: linear-gradient(262deg, #E5D7E8 0%, #7D378D 50%);
+}
+.box-item {
+    border-radius: 8px 8px 8px 8px;
+    position: relative;
+    display: inline-block;
+    width: 25%;
+    min-width: 270px;
+    vertical-align: top;
+    margin: 10px;
+    padding: 25px 20px 20px 20px;
+    min-height: 330px;
+    position: relative;
+    padding-bottom: 70px;
+}
+.box-item.active {
+    display: inline-block;
+}
+.seloType {
+    position: relative;
+    display: inline-block;
+    width: 48%;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+.colorGreen {
+    color: #0F96AE;
+}
+.colorRed {
+    color: #E5457A;
+}
+.colorPurple {
+    color: #7D378D;
+}
+.innerMod {
+    border-radius: 16px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0px 8px;
+    line-height: 20px;
+    border-radius: 16px;
+    color: #fff;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-left: -10px;
+}
+.innerGreen {
+    background:#0F96AE  ;
+}
+.innerRed {
+    background:#E5457A  ;
+}
+.innerPurple {
+    background:#7D378D  ;
+}
+.titleBox {
+    margin-top: -30px;
+    margin-bottom: 0;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 900;
+    line-height: 23px;
+    overflow-y: hidden;
+    height: 70px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.pontinhos {
+    content: '...';
+    display: none;
+    font-size: 12px;
+    position: absolute;
+    right: 10%;
+    top: 22.5%;
+}
+.categoriaHide {
+    display: none;
+    position: absolute;
+}
+.partir {
+    font-weight: 600;
+    margin-bottom: 0;
+    font-size: 13px;
+}
+.pula {
+    height: 0;
+    position: relative;
+    margin-bottom:-8px;
+}
+.ateFinal {
+    font-size: 12px;
+    color: #747D8C;
+    font-weight: 600;
+    margin-top: -4px;
+    margin-bottom: 7px;
+}
+.valorSDesconto, .dezoitoxSDesconto {
+    font-size: 14px;
+    text-decoration: line-through;
+    color: #747D8C;
+}
+.valorCDesconto, .dezoitoxCDesconto {
+    font-size: 28px;
+    font-weight: 700;
+}
+.valorCDesconto {
+    display: none;
+}
+.loading {
+    position: absolute;
+    right: 20%;
+    top: 130px;;
+}
+.loading img {
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+}
+.conteudoBox {
+    margin: 0;
+    font-size: 14px;
+}
+.conteudoBox span {
+    font-size: 12px;
+    color: #747D8C;
+}
+.conteudoBox:last-child {
+    margin-bottom: 20px;
+}
+.wrapThings {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 48%;
+    margin-top: 30px;
+    color: #747D8C;
+}
+.unidades {
+    margin-bottom: 0;
+    /* margin-top: -10px; */
+    font-size: 14px;
+}
+.carga {
+    font-size: 14px;
+    margin-bottom: 0;
+    margin-top: -15px;
+}
+.apenasEAD {
+    font-size:13px;
+    position: relative;
+    display: block;
+    
+}
+.dozexCDesconto {
+    display: none;
+    font-size: 28px;
+    font-weight: 700;
+}
+.apiGets {
+    font-size: 11px;
+}
+/* area de boxes  */
+.innerProcurado {
+    width: 300px !important;
+    border: 1px solid #fff;
+    border-radius: 15px;
+    height: 350px !important;
+    margin-right: 60px !important;
+    margin-top: 40px;
+    color: #fff !important;
+    /* background-color: #fff; */
+}
+.innerProcurado.presencial {
+    background-color: #0F96AE;
+}
+.innerProcurado.digital {
+    background-color: #E5457A;
+}
+.innerProcurado:nth-child(1) {
+    margin-left: 100px !important;
+}
+.innerProcurado:before {
+    font-size: 264px;
+    font-weight: 900;
+    font-family: Ubuntu;
+    color: transparent;
+    -webkit-text-stroke: 2px #EF7D00;
+    background: transparent;
+    position: relative !important;
+    top: -129px !important;
+    left: -72px !important;
+    z-index: 999999999999999999 !important;
+}
+.innerProcurado:nth-child(1):before {
+    content: "1";
+}
+.innerProcurado:nth-child(2):before {
+    content: "2";
+}
+.innerProcurado:nth-child(3):before {
+    content: "3";
+}
+.innerProcurado:nth-child(4):before {
+    content: "4";
+}
+.innerProcurado:nth-child(5):before {
+    content: "5";
+}
+.innerProcurado:nth-child(6):before {
+    content: "6";
+}
+.innerProcurado:nth-child(7):before {
+    content: "7";
+}
+.innerProcurado:nth-child(8):before {
+    content: "8";
+}
+.innerProcurado:nth-child(9):before {
+    content: "9";
+}
+.innerProcurado:nth-child(10):before {
+    content: "10";
+}
+.innerProcurado:nth-child(11):before {
+    content: "11";
+}
+.innerProcurado:nth-child(12):before {
+    content: "12";
+}
+.course-thumbnail {
+    position: absolute !important;
+    top: 0px;
+    left: 0;
+    border-radius: 15px 15px 0 0;
+    overflow: hidden;
+}
+.course-thumbnail img {
+    height: 180px;
+    object-fit: cover
+}
+.wrapProcurado {
+    width: 87%;
+    margin: -184px auto 0 auto !important;
+}
+.titleTop10 {
+    position: absolute;
+    display: block;
+    width: 90%;
+    height: 42px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    margin-top: -15px;
+    text-align: left;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 22px;
+}
+.seloTypeTop10 {
+    position: absolute;
+    margin-top:10px;
+    top: 186px;
+    font-size: 12px;
+}
+.innerModTop10 {
+    position: absolute;
+    right: 58px;
+    top: 195px;
+    border-radius: 16px;
+    background: #FFF;
+    color: #555 !important;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 0 5px 0 5px;
+    text-transform: uppercase;
+    line-height: 20px;
+}
+.cargaHorariaTop {
+    position: relative;
+    top: 70px;
+    font-size: 16px;
+    left: -52px;
+}
+p.course-price {
+    margin-top: 43px;
+    text-align: left;
+    font-size: 20px;
+    /* margin-left: 2px; */
+    font-weight: 400;
+}
+p.course-price span {
+    color:#fff;
+}
+.apenasEADTop {
+    font-weight: 400 !important;
+}
+.apenasPresencialTop {
+    font-weight: 400 !important;
+}
+.valorCDescontoTop {
+    font-size: 20px;
+    font-weight: 600;
+}
+.apenasEADTop {
+    display: none;
+}
+.apenasPresencialTop {
+    display: none;
+}
+.apenasSemipresencialTop {
+    display: none;
+}
+.apenasPresencialUnidade {
+    /* display: none; */
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 16px;
+}
+.innerProcurado .categoria {
+    font-weight: 600;
+}
+.clickTop {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+.button-next {
+    position: absolute;
+    right: 6%;
+    top: 302px;
+    cursor: pointer;
+    z-index: 9999999;
+}
+.button-prev {
+    position: absolute;
+    left: 5%;
+    top: 302px;
+    cursor: pointer;
+    z-index: 9999999;
+}
+.swiper-css-mode>.swiper-wrapper {
+    padding-bottom: 75px;
+}
+
+.wrapPolos {
+    position: relative;
+    display: block;
+    background: #F1F2F6;
+    padding: 20px;
+    border-radius: 20px;
+    /* display: none; */
+    transition: all .4s;
+    z-index: 1;
+}
+.innerPolo {
+    position: relative;
+    display: block;
+    height: auto;
+    width: 100%;
+}
+.colunaPolo {
+    position: relative;
+    display: inline-block;
+    width: 18%;
+    vertical-align: middle;
+    margin-right: 20px;
+    font-size: 12px;
+    text-align: left;
+}
+.nomePolo {
+    width: 10%;
+}
+.enderecoPolo {
+    width: 20%;
+}
+.telefonePolo {
+    width: 20%;
+}
+.emailPolo {
+    width: 25%;
+}
+.horarioPolo {
+    width: 10%;
+}
+.filtrarCursos {
+    display: flex !important;
+    transition: all .4s;
+    width: 100%;
+}
+
+/* temporario vin  */
+.selectUnidade {
+    display: inline-block !important;
+}
+
+.findInterBar {
+    position: absolute;
+    left: 7%;
+    top: 38%;
+    z-index: 999999;
+}
+
+.mobFiltros {
+    display: none;
+    z-index: -999;
+}
+.btnRedcolher {
+    display: none;
+}
+
+input#findCurso {
+    padding-left: 62px !important;
+    padding-top: 11px;
+}
+ .top10Sw {
+    max-width: 1030px;
+}
+@media(max-width:758px) {
+    .mobFiltros {
+        display: block;
+        margin-top: 20px;
+        cursor: pointer;
+        z-index: 9999;
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        gap: 8px; 
+        width: 100%;
+    }
+    .findBar {
+        height: 225px !important;
+    }
+    .findInterBar {
+        top: 15%;
+    }
+    input#findCurso {
+        position: relative !important;
+        top: -3px;
+        width: 90% !important;
+    }
+    .btnFindCurso {
+        width:90%;
+        margin-top: 13px;
+    }
+    .lineOne {
+        display: none;
+    }
+    .filtrarCursos {
+        display: block !important;
+    }
+    .innerSelect {
+        position: relative;
+        display: block !important;
+        width: 90%;
+        margin: 5px auto;
+    }
+    .btnRedcolher {
+        display: block;
+        margin: 20px auto;
+        position: relative;
+        text-align: center;
+        cursor: pointer;
+    }
+    .lineTwo {
+        display: none;
+        transition: all .4s;
+    }
+    .lineTwo.active {
+        display: block;
+        width: 100%;
+        height: 220px;
+        max-width: 1300px;
+        background-color: #fff;
+        position: relative;
+        z-index: 99999;
+        transition: all .4s;
+        margin-bottom: 20px;
+    }
+
+
+    .titleTop10 {
+        margin-top: -28px !important;
+    }
+    .seloTypeTop10 {
+        top: -31px !important;
+    }
+    .innerModTop10 {
+        top: -21px !important;
+        right: 50px !important;
+    }
+    p.course-price {
+        margin-top: 33px !important;
+    }
+    .cargaHorariaTop {
+        top: 41px;
+        left: -38px
+    }
+
+    .static {
+        right: 19px;
+    }
+    .wrapPolosD .iconMapa {
+        left: 16px;
+    }
+    .wrapPolosD .titleUnidade {
+        left: 50px;
+    }
+
+
+    .sobrePos .column {
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
+        display: block;
+    }
+    .wrapIcon {
+        position: relative;
+        left: auto;
+        display: block;
+        margin: 20px auto;
+    }
+    .boxEnsino {
+        display: block;
+        width: 90%;
+        margin: 0 auto 30px;
+        max-width: 500px;
+    }
+    .boxUnidade {
+        display: block;
+        width: 90%;
+        margin: 0 auto 30px;
+    }
+    .wrapPolosD {
+        width: 90%;
+    }
+    .colunaPolo {
+        width: 100%;
+    }
+    .button-next {
+        display: none;
+    }
+    .button-prev {
+        display: none;
+    }
+
+    .top10Sw {
+        width: 170%;
+    }
+    .top10Sw .swiper-pagination {
+        left: -19% !important;
+    }
+    .seloTypeTop10 {
+        top: -20px;
+    }
+    .innerModTop10 {
+        top: -22px;
+    }
+    .wrapProcurado {
+        width: 87%;
+        margin: 0px auto 0 auto;
+        position: relative;
+        top: 30px;
+    }
+    .course-thumbnail {
+        position: absolute !important;
+        top: -257px;
+        left: -17px;
+        border-radius: 15px 15px 0 0;
+        overflow: hidden;
+        width: 115%;
+    }
+    .comBarra {
+        padding: 0;
+    }
+    .box-container {
+        max-height: 750px;
+    }
+
+
+    .innerProcurado {
+        width: 60% !important;
+        margin-right: 25px !important;
+    }
+    .innerProcurado:before {
+        left: -64px !important;
+        font-size: 224px !important;
+    }
+    .course-thumbnail {
+        top: -240px !important;
+    }
+}

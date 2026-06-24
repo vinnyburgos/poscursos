@@ -1,0 +1,904 @@
+<?php
+/**
+ * Template Name: URL GRADUAÇÃO CUPOM
+ *
+ * Este é o template específico para a página de CUPOM.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package WordPress
+ * @subpackage Twenty_Seventeen
+ * @since Twenty Seventeen 1.0
+ * @version 1.0
+ */
+
+// Impede indexação pelos motores de busca
+
+?><!DOCTYPE html>
+<html lang="pt-BR" style="scroll-behavior: smooth;padding:10px;padding-top:0;padding-bottom:0;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php wp_head(); ?>
+</head>
+<body <?php body_class(); ?>>
+
+<?php
+add_action('wp_head', function() {
+    echo '<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate">' . "\n";
+    echo '<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">' . "\n";
+    echo '<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">' . "\n";
+    echo '<meta name="slurp" content="noindex, nofollow, noarchive, nosnippet, noimageindex">' . "\n";
+}, 1);
+
+// Remove da sitemap do Yoast SEO
+add_filter('wpseo_sitemap_exclude_post_type', function($excluded, $post_type) {
+    if (is_page() && get_page_template_slug() === 'page-cupom.php') {
+        return true;
+    }
+    return $excluded;
+}, 10, 2);
+
+// Remove de feeds RSS
+add_action('pre_get_posts', function($query) {
+    if ($query->is_feed() && $query->is_main_query()) {
+        $query->set('meta_query', array(
+            array(
+                'key' => '_wp_page_template',
+                'value' => 'page-cupom.php',
+                'compare' => '!='
+            )
+        ));
+    }
+});
+
+// Impede tracking do Google Analytics (se estiver usando gtag)
+add_action('wp_head', function() {
+    if (is_page_template('page-cupom.php')) {
+        echo '<script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("config", "GA_MEASUREMENT_ID", {
+                "custom_map": {"page_title": "Private Page"},
+                "send_page_view": false
+            });
+        </script>' . "\n";
+    }
+}, 5);
+
+// Adiciona header HTTP para não indexar
+add_action('send_headers', function() {
+    if (is_page_template('page-cupom.php')) {
+        header('X-Robots-Tag: noindex, nofollow, noarchive, nosnippet');
+    }
+});
+
+// Remove de resultados de busca interna do WordPress
+add_action('pre_get_posts', function($query) {
+    if (!is_admin() && $query->is_search() && $query->is_main_query()) {
+        $meta_query = $query->get('meta_query') ?: [];
+        $meta_query[] = array(
+            'key' => '_wp_page_template',
+            'value' => 'page-cupom.php',
+            'compare' => '!='
+        );
+        $query->set('meta_query', $meta_query);
+    }
+});
+?>
+
+
+
+<script src="<?php echo get_template_directory_uri(); ?>/cupom.js"></script>
+<!-- <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/home.css"> -->
+<style>
+    * {
+        font-family: Arial, sans-serif;
+    }
+</style>
+<section class="encontreCurso">
+
+    <div class="center"> 
+        <!-- FILTROS -->
+        <div style="margin-bottom: 20px; padding: 15px; background: #f0f0f0; border-radius: 5px;">
+            <label for="filtroModalidade" style="font-weight: bold; margin-right: 10px;display: inline-block;width:200px;">Filtrar por modalidade:</label>
+            <select id="filtroModalidade" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; background: white;">
+                <option value="">Todos os cursos</option>
+                <option value="presencial">Apenas Presencial</option>
+                <option value="digital">Apenas Digital (EaD)</option>
+            </select>
+        </div>
+        
+        <!-- LISTA DE CURSOS -->
+        
+		<?php
+			// Caminho dinâmico para o getAPICards.php
+			$api_url = get_template_directory_uri() . '/getAPICards.php';
+
+			// Usando cURL para garantir compatibilidade
+			$ch = curl_init($api_url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			$cursos_json = curl_exec($ch);
+			curl_close($ch);
+
+			$json_path = __DIR__ . '/dadosHome.json';
+
+			// Tenta decodificar o JSON da API
+			$cursos_data = json_decode($cursos_json, true);
+
+			// Se a API retornar dados válidos, salva o JSON
+			if (!empty($cursos_data) && is_array($cursos_data)) {
+				file_put_contents($json_path, $cursos_json);
+			} else {
+				// Se a API falhar, tenta carregar do arquivo local
+				if (file_exists($json_path)) {
+					$cursos_json = file_get_contents($json_path);
+					$cursos_data = json_decode($cursos_json, true);
+				} else {
+					$cursos_data = [];
+				}
+			}
+
+			// Se o JSON vier agrupado por tipo (ex: $cursos_data['graduacao']), ajuste conforme necessário:
+			$cursos = $cursos_data['graduacao'] ?? $cursos_data;
+		?>
+		<?php
+			// Inclui o arquivo findCursosWP.php para ter acesso a $cursos_data do WP_Query
+			include 'findCursosWP.php';
+			
+			// Cria um array associativo para fácil lookup do permalink pelo mneumonico
+			$wp_cursos_map = array_column($cursos_data, 'permalink', 'mneumonico');
+		?>
+
+		<div style="display: flex; gap: 20px; align-items: flex-start;">
+			<div class="cursos-list-container" style="max-height: 250px; overflow-y: auto; border: 1px solid #ddd; padding: 15px; background: #f9f9f9; flex: 2;">
+		<?php if (!empty($cursos) && is_array($cursos)): ?>
+			<?php foreach ($cursos as $index => $curso): ?>
+				<?php
+					$mneumonico_curso = $curso['mnemonico'] ?? '';
+					$modalidade_original = $curso['modalidade'] ?? 'Presencial';
+					$modalidade = (stripos($modalidade_original, 'ead') !== false || stripos($modalidade_original, 'digital') !== false) ? 'Digital (EaD)' : $modalidade_original;
+					$is_digital = (strtolower($modalidade) === 'digital (ead)' || strtolower($modalidade) === 'digital online (ead)');
+				?>
+				<div class="curso-line" style="border-bottom: 1px solid #e0e0e0; padding: 5px 0; margin-bottom: 5px;" data-modalidade="<?php echo $is_digital ? 'digital' : 'presencial'; ?>" data-curso='<?php echo json_encode($curso, JSON_HEX_APOS | JSON_HEX_QUOT); ?>'>
+					<div style="display: grid; grid-template-columns: 1fr 120px 120px; gap: 15px; align-items: center;">
+						<div>
+							<h4 class="curso-nome" style="margin: 0; font-size: 14px; line-height: 1.2; color: #333; cursor: pointer; transition: color 0.2s;" onclick="mostrarDetalhes(this)" title="Clique para ver detalhes JSON">
+								<?php echo esc_html($curso['curso'] ?? $curso['nome'] ?? ''); ?>
+							</h4>
+						</div>
+						
+						<div style="text-align: center;">
+							<span class="modalidade-badge" style="background: <?php echo $is_digital ? '#dc3545' : '#28a745'; ?>; color: white; padding: 3px 6px; border-radius: 3px; font-size: 10px; font-weight: bold;">
+								<?php echo esc_html($modalidade); ?>
+							</span>
+						</div>
+						
+						<div style="text-align: center;">
+							<div style="font-size: 10px; color: #666;">Mnemônico</div>
+							<div class="mneumonico-copy" style="font-weight: bold; font-family: monospace; background: #f0f0f0; padding: 1px 4px; border-radius: 3px; cursor: pointer; transition: background-color 0.2s; font-size: 12px;" title="Clique para copiar" onclick="copiarMneumonico(this)">
+								<?php echo esc_html($mneumonico_curso ?: 'N/A'); ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php endforeach; ?>
+		<?php else: ?>
+			<p>Nenhum curso encontrado.</p>
+		<?php endif; ?>
+			</div>
+			
+			<div class="json-viewer" style="flex: 1; max-width: 35%;max-height: 182px;display: inline-block; vertical-align: top;">
+				<div style="background: #f5f5f5; border: 1px solid #ddd; padding: 15px; border-radius: 5px;">
+					<h4 style="margin-top: 0; color: #333;">Detalhes do Curso (JSON)</h4>
+					<div id="json-content" style="background: #2d3748; color: #e2e8f0; padding: 15px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.4; max-height: 182px; overflow-y: auto; white-space: pre-wrap;">Clique em um nome de curso para<br>visualizar os dados JSON completos.</div>
+				</div>
+			</div>
+		</div>
+		<div style="text-align: center; margin-top: 20px; width: 100%;">
+			<p style="color: #666;">Total de cursos: <span id="total-cursos"></span></p>
+		</div>
+		
+		<!-- GERADOR DE URL COM CUPOM -->
+		<div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px;">
+			<h3 style="margin-top: 0; color: #495057; font-size: 18px;">Gerador de URL com Cupom</h3>
+			
+			<!-- Linha 1: Curso -->
+			<div style="margin-bottom: 15px;">
+				<label for="selectCurso" style="display: block; margin-bottom: 5px; font-weight: bold; color: #495057;">1. Curso (Nome - Mnemônico - Modalidade):</label>
+				<select id="selectCurso" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background: white;">
+					<option value="">-- Selecione um curso --</option>
+				</select>
+			</div>
+			
+			<!-- Linha 2: Unidade e Turno -->
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 15px;">
+				<div>
+					<label for="selectUnidade" style="display: block; margin-bottom: 5px; font-weight: bold; color: #495057;">2. Unidade:</label>
+					<select id="selectUnidade" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background: white;" disabled>
+						<option value="">-- Selecione um curso primeiro --</option>
+					</select>
+				</div>
+				
+				<div>
+					<label for="selectTurno" style="display: block; margin-bottom: 5px; font-weight: bold; color: #495057;">3. Turno:</label>
+					<select id="selectTurno" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background: white;" disabled>
+						<option value="">-- Selecione unidade primeiro --</option>
+					</select>
+				</div>
+			</div>
+			
+			<!-- Linha 3: ID e Cupom -->
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 15px;">
+				<div>
+					<label for="inputId" style="display: block; margin-bottom: 5px; font-weight: bold; color: #495057;">ID da Combinação:</label>
+					<input type="text" id="inputId" placeholder="Será preenchido automaticamente" readonly style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background: #f8f9fa; color: #495057;">
+				</div>
+				
+				<div>
+					<label for="inputCupom" style="display: block; margin-bottom: 5px; font-weight: bold; color: #495057;">4. Código do Cupom:</label>
+					<input type="text" id="inputCupom" placeholder="Digite o código do cupom" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+				</div>
+			</div>
+			
+			<!-- Linha 4: Botão -->
+			<div style="text-align: center; margin-top: 20px;">
+				<button id="btnGerarURL" style="background: #007bff; color: white; border: none; padding: 12px 24px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#007bff'">
+					5. GERAR URL COM CUPOM
+				</button>
+			</div>
+			
+			<div id="urlGerada" style="margin-top: 15px; padding: 15px; background: #e9ecef; border-radius: 4px; display: none;">
+				<h4 style="margin-top: 0; color: #495057;">URL Gerada:</h4>
+				<div style="background: white; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: monospace; font-size: 14px; word-break: break-all; cursor: pointer;" id="urlTexto" onclick="copiarURL(this)" title="Clique para copiar">
+					<!-- URL será gerada aqui -->
+				</div>
+				<small style="color: #6c757d; margin-top: 5px; display: block;">Clique na URL para copiá-la</small>
+			</div>
+		</div>
+</section>
+
+<script>
+// Função para mostrar detalhes do curso
+function mostrarDetalhes(elemento) {
+    const cursoLine = elemento.closest('.curso-line');
+    const cursoData = cursoLine.getAttribute('data-curso');
+    const jsonContent = document.getElementById('json-content');
+    
+    try {
+        const curso = JSON.parse(cursoData);
+        const jsonFormatado = JSON.stringify(curso, null, 2);
+        jsonContent.textContent = jsonFormatado;
+        
+        // Adiciona highlight visual no curso selecionado
+        document.querySelectorAll('.curso-line').forEach(line => {
+            line.style.backgroundColor = '';
+        });
+        cursoLine.style.backgroundColor = '#e3f2fd';
+        
+    } catch (error) {
+        jsonContent.textContent = 'Erro ao carregar dados do curso: ' + error.message;
+    }
+}
+
+// Função para copiar mnemônico
+function copiarMneumonico(elemento) {
+    const texto = elemento.textContent.trim();
+    
+    // Método moderno (funciona na maioria dos navegadores)
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(texto).then(function() {
+            mostrarFeedback(elemento, 'Copiado!', '#28a745');
+        }).catch(function() {
+            // Fallback se der erro
+            copiarFallback(texto, elemento);
+        });
+    } else {
+        // Fallback para navegadores mais antigos
+        copiarFallback(texto, elemento);
+    }
+}
+
+// Método fallback para copiar
+function copiarFallback(texto, elemento) {
+    const textArea = document.createElement('textarea');
+    textArea.value = texto;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        mostrarFeedback(elemento, 'Copiado!', '#28a745');
+    } catch (err) {
+        mostrarFeedback(elemento, 'Erro!', '#dc3545');
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+// Mostra feedback visual
+function mostrarFeedback(elemento, texto, cor) {
+    const original = elemento.textContent;
+    const corOriginal = elemento.style.backgroundColor;
+    
+    elemento.style.backgroundColor = cor;
+    elemento.style.color = 'white';
+    elemento.textContent = texto;
+    
+    setTimeout(function() {
+        elemento.style.backgroundColor = corOriginal;
+        elemento.style.color = '';
+        elemento.textContent = original;
+    }, 1000);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Conta o total de cursos
+    const totalCursos = document.querySelectorAll('.curso-line').length;
+    const totalElement = document.getElementById('total-cursos');
+    if (totalElement) {
+        totalElement.textContent = totalCursos;
+    }
+
+    // Filtro por modalidade
+    const filtroModalidade = document.getElementById('filtroModalidade');
+    const cursoLines = document.querySelectorAll('.curso-line');
+
+    filtroModalidade.addEventListener('change', function() {
+        const filtroSelecionado = this.value;
+        let cursosVisiveis = 0;
+
+        cursoLines.forEach(function(linha) {
+            const modalidade = linha.getAttribute('data-modalidade');
+            
+            if (filtroSelecionado === '' || modalidade === filtroSelecionado) {
+                linha.style.display = '';
+                cursosVisiveis++;
+            } else {
+                linha.style.display = 'none';
+            }
+        });
+
+        // Atualiza contador
+        if (totalElement) {
+            totalElement.textContent = cursosVisiveis;
+        }
+    });
+
+    // Adiciona hover effect nos mnemônicos e nomes de curso
+    const mneumonicos = document.querySelectorAll('.mneumonico-copy');
+    mneumonicos.forEach(function(elemento) {
+        elemento.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = '#e0e0e0';
+        });
+        
+        elemento.addEventListener('mouseleave', function() {
+            this.style.backgroundColor = '#f0f0f0';
+        });
+    });
+
+    // Hover effect para nomes de curso
+    const nomeCursos = document.querySelectorAll('.curso-nome');
+    nomeCursos.forEach(function(elemento) {
+        elemento.addEventListener('mouseenter', function() {
+            this.style.color = '#007bff';
+        });
+        
+        elemento.addEventListener('mouseleave', function() {
+            this.style.color = '#333';
+        });
+    });
+
+    // GERADOR DE URL COM CUPOM
+    const cursosData = [];
+    
+    // Coleta dados dos cursos para os selects
+    cursoLines.forEach(function(linha) {
+        const cursoData = linha.getAttribute('data-curso');
+        if (cursoData) {
+            try {
+                const curso = JSON.parse(cursoData);
+                cursosData.push(curso);
+            } catch (error) {
+                console.error('Erro ao processar curso:', error);
+            }
+        }
+    });
+
+    // Popula o select de cursos
+    const selectCurso = document.getElementById('selectCurso');
+    const selectUnidade = document.getElementById('selectUnidade');
+    const selectTurno = document.getElementById('selectTurno');
+    
+    // Cria lista de cursos únicos com todas as informações
+    const cursosCompletos = [];
+    
+    cursosData.forEach(function(curso) {
+        const nomeCurso = curso.curso || curso.nome || '';
+        const mneumonico = curso.mnemonico || curso.mneumonico || '';
+        const modalidadeOriginal = curso.modalidade || 'Presencial';
+        
+        // Melhor detecção da modalidade
+        let modalidade = 'Presencial';
+        const modalidadeLower = modalidadeOriginal.toLowerCase();
+        
+        if (modalidadeLower.includes('ead') || modalidadeLower.includes('digital') || modalidadeLower.includes('distancia') || modalidadeLower.includes('online')) {
+            modalidade = 'Digital (EaD)';
+        }
+        
+        // console.log('Curso:', nomeCurso, 'Modalidade Original:', modalidadeOriginal, 'Modalidade Processada:', modalidade);
+        
+        if (nomeCurso && mneumonico) {
+            // Cria identificador único
+            const identificador = `${nomeCurso}_${mneumonico}_${modalidade}`;
+            
+            if (!cursosCompletos.find(c => c.identificador === identificador)) {
+                cursosCompletos.push({
+                    identificador: identificador,
+                    nome: nomeCurso,
+                    mneumonico: mneumonico,
+                    modalidade: modalidade,
+                    dadosOriginais: curso
+                });
+            }
+        }
+    });
+
+    // Ordena por nome do curso
+    cursosCompletos.sort((a, b) => a.nome.localeCompare(b.nome));
+
+    // Popula o select com formato: "Nome - Mnemônico - Modalidade"
+    cursosCompletos.forEach(function(cursoInfo) {
+        const option = document.createElement('option');
+        option.value = JSON.stringify(cursoInfo);
+        option.textContent = `${cursoInfo.nome} - ${cursoInfo.mneumonico} - ${cursoInfo.modalidade}`;
+        selectCurso.appendChild(option);
+    });
+
+    // 1. Quando seleciona um curso (que já contém nome, mnemônico e modalidade)
+    selectCurso.addEventListener('change', function() {
+        const cursoSelecionado = this.value;
+        console.log('Curso selecionado:', cursoSelecionado);
+        
+        // Limpa e desabilita os outros selects
+        selectUnidade.innerHTML = '<option value="">-- Carregando unidades... --</option>';
+        selectTurno.innerHTML = '<option value="">-- Selecione unidade primeiro --</option>';
+        
+        selectUnidade.disabled = true;
+        selectTurno.disabled = true;
+        
+        if (cursoSelecionado) {
+            try {
+                const cursoInfo = JSON.parse(cursoSelecionado);
+                console.log('Curso info parsed:', cursoInfo);
+                console.log('Mnemônico extraído:', cursoInfo.mneumonico);
+                
+                // Busca dados detalhados via API para este mnemônico específico
+                const apiUrl = '<?php echo get_template_directory_uri(); ?>/getAPI_cupom.php';
+                const url = `${apiUrl}?mneumonico=${encodeURIComponent(cursoInfo.mneumonico)}&tipo=graduacao`;
+                console.log('URL da API:', url);
+                
+                fetch(url)
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    console.log('Response ok:', response.ok);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Dados recebidos da API:', data);
+                    
+                    if (data.success && data.data) {
+                        const cursoDetalhado = data.data;
+                        console.log('Curso detalhado:', cursoDetalhado);
+                        
+                        // ARMAZENA O CURSO COMPLETO EM VARIÁVEL GLOBAL PARA USAR DEPOIS
+                        window.cursoAtualCompleto = cursoDetalhado;
+                        console.log('Curso completo armazenado:', cursoDetalhado);
+                        console.log('Array de investimentos completo:', cursoDetalhado.investimentos);
+                        
+                        selectUnidade.innerHTML = '<option value="">-- Selecione uma unidade --</option>';
+                        selectUnidade.disabled = false;
+                        
+                        const unidades = [];
+                        
+                        // Processa as unidades dentro de "investimentos"
+                        if (cursoDetalhado.investimentos && Array.isArray(cursoDetalhado.investimentos)) {
+                            console.log('Investimentos encontrados:', cursoDetalhado.investimentos);
+                            console.log('Total de investimentos:', cursoDetalhado.investimentos.length);
+                            
+                            // Coleta nomes únicos de unidades
+                            const unidadesUnicas = [];
+                            
+                            cursoDetalhado.investimentos.forEach(function(investimento, index) {
+                                console.log(`Investimento ${index}:`, investimento);
+                                
+                                const nomeUnidade = investimento.unidade;
+                                console.log(`  - Unidade: "${nomeUnidade}"`);
+                                console.log(`  - Horário: "${investimento.horario}"`);
+                                
+                                // Adiciona unidade única (sem repetir)
+                                if (nomeUnidade && !unidadesUnicas.includes(nomeUnidade)) {
+                                    unidadesUnicas.push(nomeUnidade);
+                                    console.log(`✅ Nova unidade adicionada: "${nomeUnidade}"`);
+                                }
+                            });
+                            
+                            console.log('Unidades únicas encontradas:', unidadesUnicas);
+                            
+                            // Cria objetos de unidade para o select
+                            unidadesUnicas.forEach(function(nomeUnidade) {
+                                unidades.push({
+                                    nome: nomeUnidade,
+                                    cursoInfo: cursoInfo
+                                });
+                            });
+                            
+                            console.log(`✅ ${unidades.length} unidades processadas para o select`);
+                        } else {
+                            console.log('Estrutura investimentos não encontrada, tentando estruturas alternativas');
+                            console.log('Chaves disponíveis:', Object.keys(cursoDetalhado));
+                            
+                            // Tenta buscar unidades diretamente
+                            if (cursoDetalhado.unidades && Array.isArray(cursoDetalhado.unidades)) {
+                                console.log('Unidades encontradas:', cursoDetalhado.unidades);
+                                cursoDetalhado.unidades.forEach(function(unidade) {
+                                    const nomeUnidade = unidade.nome || unidade.unidade || '';
+                                    if (nomeUnidade && !unidades.find(u => u.nome === nomeUnidade)) {
+                                        unidades.push({
+                                            nome: nomeUnidade,
+                                            dados: unidade,
+                                            horarios: unidade.horarios || unidade.turnos || [],
+                                            id: unidade.id || '',
+                                            cursoInfo: cursoInfo
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                        
+                        // Se não encontrou unidades na estrutura padrão, tenta outras estruturas possíveis
+                        if (unidades.length === 0) {
+                            // Tenta buscar em outras possíveis estruturas da API
+                            if (cursoDetalhado.campus || cursoDetalhado.unidade) {
+                                const dadosUnidade = cursoDetalhado.campus || cursoDetalhado.unidade;
+                                console.log('Usando dados alternativos:', dadosUnidade);
+                                unidades.push({
+                                    nome: dadosUnidade.nome || dadosUnidade.unidade || 'Unidade Principal',
+                                    dados: dadosUnidade,
+                                    turnos: dadosUnidade.turnos || cursoDetalhado.turnos || [],
+                                    cursoInfo: cursoInfo
+                                });
+                            }
+                        }
+                        
+                        console.log('Unidades processadas:', unidades);
+                        
+                        unidades.sort((a, b) => a.nome.localeCompare(b.nome));
+                        
+                        unidades.forEach(function(unidadeInfo) {
+                            const option = document.createElement('option');
+                            option.value = JSON.stringify(unidadeInfo);
+                            option.textContent = unidadeInfo.nome;
+                            selectUnidade.appendChild(option);
+                        });
+                        
+                        if (unidades.length === 0) {
+                            selectUnidade.innerHTML = '<option value="">-- Nenhuma unidade encontrada --</option>';
+                            console.warn('Nenhuma unidade encontrada. Estrutura de dados completa:', cursoDetalhado);
+                        }
+                        
+                    } else {
+                        selectUnidade.innerHTML = '<option value="">-- Erro ao carregar unidades --</option>';
+                        console.error('Erro na resposta da API:', data);
+                    }
+                })
+                .catch(error => {
+                    selectUnidade.innerHTML = '<option value="">-- Erro ao carregar unidades --</option>';
+                    console.error('Erro ao buscar dados do curso:', error);
+                });
+                
+            } catch (error) {
+                console.error('Erro ao processar curso selecionado:', error);
+                selectUnidade.innerHTML = '<option value="">-- Erro ao processar seleção --</option>';
+            }
+        } else {
+            selectUnidade.innerHTML = '<option value="">-- Selecione um curso primeiro --</option>';
+        }
+    });
+
+    // 2. Quando seleciona uma unidade
+    selectUnidade.addEventListener('change', function() {
+        const unidadeSelecionada = this.value;
+        
+        selectTurno.innerHTML = '<option value="">-- Selecione um turno --</option>';
+        selectTurno.disabled = !unidadeSelecionada;
+        
+        // Limpa o campo ID
+        document.getElementById('inputId').value = '';
+        
+        if (unidadeSelecionada) {
+            try {
+                const unidadeInfo = JSON.parse(unidadeSelecionada);
+                const nomeUnidadeSelecionada = unidadeInfo.nome;
+                console.log('Unidade selecionada:', nomeUnidadeSelecionada);
+                
+                const turnos = [];
+                
+                // Usa o array completo armazenado para filtrar por unidade
+                if (window.cursoAtualCompleto && window.cursoAtualCompleto.investimentos) {
+                    const todosInvestimentos = window.cursoAtualCompleto.investimentos;
+                    console.log(`Filtrando ${todosInvestimentos.length} investimentos pela unidade "${nomeUnidadeSelecionada}"`);
+                    
+                    // Filtra investimentos que têm a mesma unidade
+                    const investimentosDaUnidade = todosInvestimentos.filter(function(investimento) {
+                        return investimento.unidade === nomeUnidadeSelecionada;
+                    });
+                    
+                    console.log(`Encontrados ${investimentosDaUnidade.length} investimentos para a unidade "${nomeUnidadeSelecionada}":`, investimentosDaUnidade);
+                    
+                    // Coleta todos os horários únicos desses investimentos
+                    const horariosUnicos = [];
+                    
+                    investimentosDaUnidade.forEach(function(investimento, index) {
+                        const horario = investimento.horario;
+                        console.log(`Investimento ${index + 1} - Horário: "${horario}"`);
+                        
+                        // Adiciona apenas se não existe ainda
+                        if (horario && !horariosUnicos.includes(horario)) {
+                            horariosUnicos.push(horario);
+                            console.log(`✅ Horário "${horario}" adicionado à lista`);
+                        } else if (horario) {
+                            console.log(`⚠️ Horário "${horario}" já existe, ignorando duplicata`);
+                        }
+                    });
+                    
+                    console.log(`Total de horários únicos para "${nomeUnidadeSelecionada}":`, horariosUnicos);
+                    
+                    // Cria objetos de turno para o select
+                    horariosUnicos.forEach(function(horario) {
+                        turnos.push({
+                            nome: horario,
+                            id: horario,
+                            dados: horario,
+                            unidade: unidadeInfo
+                        });
+                    });
+                    
+                } else {
+                    console.error('Array de investimentos não encontrado na variável global');
+                }
+                
+                console.log('Turnos processados:', turnos);
+                console.log(`Total de turnos únicos encontrados: ${turnos.length}`);
+                
+                turnos.sort((a, b) => a.nome.localeCompare(b.nome));
+                
+                turnos.forEach(function(turnoInfo) {
+                    const option = document.createElement('option');
+                    option.value = JSON.stringify(turnoInfo);
+                    option.textContent = turnoInfo.nome;
+                    selectTurno.appendChild(option);
+                });
+                
+                if (turnos.length === 0) {
+                    selectTurno.innerHTML = '<option value="">-- Nenhum horário encontrado --</option>';
+                    console.warn('Nenhum horário encontrado para unidade:', unidadeInfo);
+                }
+                
+            } catch (error) {
+                console.error('Erro ao processar unidade:', error);
+                selectTurno.innerHTML = '<option value="">-- Erro ao processar unidade --</option>';
+            }
+        }
+    });
+
+    // 3. Quando seleciona um turno - busca o ID da combinação unidade + horário
+    selectTurno.addEventListener('change', function() {
+        const turnoSelecionado = this.value;
+        const inputId = document.getElementById('inputId');
+        
+        if (turnoSelecionado) {
+            try {
+                const turnoInfo = JSON.parse(turnoSelecionado);
+                const nomeUnidade = turnoInfo.unidade.nome;
+                const nomeHorario = turnoInfo.nome;
+                
+                console.log(`Buscando ID para combinação: Unidade="${nomeUnidade}", Horário="${nomeHorario}"`);
+                
+                // Busca no array completo o investimento que tem essa combinação exata
+                if (window.cursoAtualCompleto && window.cursoAtualCompleto.investimentos) {
+                    const investimentoCorrespondente = window.cursoAtualCompleto.investimentos.find(function(investimento) {
+                        return investimento.unidade === nomeUnidade && investimento.horario === nomeHorario;
+                    });
+                    
+                    if (investimentoCorrespondente) {
+                        const idCombinacao = investimentoCorrespondente.id;
+                        inputId.value = idCombinacao;
+                        console.log(`✅ ID encontrado: ${idCombinacao}`, investimentoCorrespondente);
+                        console.log(`Dados completos do investimento:`, {
+                            id: investimentoCorrespondente.id,
+                            unidade: investimentoCorrespondente.unidade,
+                            horario: investimentoCorrespondente.horario,
+                            cidade: investimentoCorrespondente.cidade,
+                            valor: investimentoCorrespondente.valor,
+                            parcelas: investimentoCorrespondente.parcelas
+                        });
+                    } else {
+                        inputId.value = 'ID_NAO_ENCONTRADO';
+                        console.error(`❌ Nenhum investimento encontrado para Unidade="${nomeUnidade}" + Horário="${nomeHorario}"`);
+                        console.log('Investimentos disponíveis:', window.cursoAtualCompleto.investimentos);
+                    }
+                } else {
+                    inputId.value = 'ARRAY_NAO_DISPONIVEL';
+                    console.error('Array de investimentos não está disponível');
+                }
+                
+            } catch (error) {
+                console.error('Erro ao processar turno:', error);
+                inputId.value = 'ERRO_PROCESSAMENTO';
+            }
+        } else {
+            inputId.value = '';
+        }
+    });
+
+    // 4. Botão gerar URL - chama API e mostra URL retornada
+    document.getElementById('btnGerarURL').addEventListener('click', function() {
+        const cursoSelecionado = selectCurso.value;
+        const unidadeSelecionada = selectUnidade.value;
+        const turnoSelecionado = selectTurno.value;
+        const cupom = document.getElementById('inputCupom').value.trim();
+        const idCombinacao = document.getElementById('inputId').value.trim();
+        
+        if (!cursoSelecionado) {
+            alert('Por favor, selecione um curso.');
+            return;
+        }
+        
+        if (!unidadeSelecionada) {
+            alert('Por favor, selecione uma unidade.');
+            return;
+        }
+        
+        if (!turnoSelecionado) {
+            alert('Por favor, selecione um turno.');
+            return;
+        }
+        
+        if (!cupom) {
+            alert('Por favor, digite um código de cupom.');
+            return;
+        }
+        
+        if (!idCombinacao) {
+            alert('ID da combinação não foi encontrado. Tente selecionar os campos novamente.');
+            return;
+        }
+
+        try {
+            const cursoInfo = JSON.parse(cursoSelecionado);
+            const unidadeInfo = JSON.parse(unidadeSelecionada);
+            const turnoInfo = JSON.parse(turnoSelecionado);
+            
+            // Extrai apenas o nome do curso (sem mneumonico nem modalidade)
+            const descricao_curso = cursoInfo.nome;
+            
+            console.log('Enviando dados para API:', {
+                descricao_curso: descricao_curso,
+                oferta: idCombinacao,
+                cupom: cupom
+            });
+            
+            // Chama a API sendAPI_cupom.php
+            fetch('/wp-content/themes/twentyseventeen/sendAPI_cupom.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    descricao_curso: descricao_curso,  // Nome do curso apenas
+                    oferta: idCombinacao,              // ID da combinação
+                    cupom: cupom                       // Código do cupom
+                })
+            })
+            .then(response => {
+                console.log('Status da resposta:', response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Resposta da API:', data);
+                
+                const urlGerada = document.getElementById('urlGerada');
+                const urlTexto = document.getElementById('urlTexto');
+                
+                if (data.success && data.data && data.data.redirect_url) {
+                    // Usa a URL retornada pela API
+                    const urlDaAPI = data.data.redirect_url;
+                    urlTexto.textContent = urlDaAPI;
+                    urlGerada.style.display = 'block';
+                    
+                    console.log('URL da API exibida:', urlDaAPI);
+                    
+                    // Auto scroll para a URL gerada
+                    urlGerada.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                } else {
+                    console.error('Resposta da API não contém redirect_url:', data);
+                    alert('Erro: A API não retornou uma URL válida. Verifique os dados e tente novamente.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro na chamada da API:', error);
+                alert('Erro ao gerar URL. Verifique sua conexão e tente novamente.');
+            });
+            
+        } catch (error) {
+            console.error('Erro ao processar dados:', error);
+            alert('Erro ao processar dados. Tente novamente.');
+        }
+    });
+});
+
+// Função auxiliar para verificar se string contém substring (case insensitive)
+function stripos(haystack, needle) {
+    return haystack.toLowerCase().indexOf(needle.toLowerCase());
+}
+
+// Função para copiar URL gerada
+function copiarURL(elemento) {
+    const texto = elemento.textContent.trim();
+    
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(texto).then(function() {
+            mostrarFeedbackURL(elemento, 'URL Copiada!', '#28a745');
+        }).catch(function() {
+            copiarFallbackURL(texto, elemento);
+        });
+    } else {
+        copiarFallbackURL(texto, elemento);
+    }
+}
+
+function copiarFallbackURL(texto, elemento) {
+    const textArea = document.createElement('textarea');
+    textArea.value = texto;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        mostrarFeedbackURL(elemento, 'URL Copiada!', '#28a745');
+    } catch (err) {
+        mostrarFeedbackURL(elemento, 'Erro ao copiar!', '#dc3545');
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+function mostrarFeedbackURL(elemento, texto, cor) {
+    const original = elemento.textContent;
+    const corOriginalFundo = elemento.style.backgroundColor;
+    const corOriginalTexto = elemento.style.color;
+    
+    elemento.style.backgroundColor = cor;
+    elemento.style.color = 'white';
+    elemento.textContent = texto;
+    
+    setTimeout(function() {
+        elemento.style.backgroundColor = corOriginalFundo;
+        elemento.style.color = corOriginalTexto;
+        elemento.textContent = original;
+    }, 2000);
+}
+</script>
+
+</body>
+</html>

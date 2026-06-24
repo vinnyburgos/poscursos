@@ -1,0 +1,976 @@
+body {
+    overflow: hidden !important;
+}
+.ateFinal {
+    font-size: 12px;
+    color: #747D8C;
+}
+.clear {
+    clear: both;
+}
+.entry-footer {
+    display: none;
+}
+.breadcrumb {
+    margin-bottom: 90px;
+}
+.breadcrumb p span {
+    margin-right: 10px;
+    color: #fff !important;
+    margin-left: 10px;
+}
+.breadcrumb p span:nth-child(1) {
+    margin-left: 0px;
+}
+.breadcrumb a {
+    color: #fff !important;
+}
+.wrapModalidade {
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+.wrapModalidade  h4 {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+}
+.innerMod {
+    top: -5px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    line-height: 21px;
+    border-radius: 16px;
+    /* color: var(--Expand-Palete-US-Sky-Blue-US-Sky-Blue-US, #0F96AE); */
+    font-family: Ubuntu;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: var(--Expand-Palete-US-Grayscale-US-White, #FFF);
+}
+.entry-title {
+    color: #fff !important;
+    font-size: 30px;
+    line-height: 35px;
+    font-weight: 700;
+    text-transform: uppercase !important;
+}
+@media(max-width:768px) {
+    .entry-title {
+        font-size: 23px;
+    }
+}
+.headerCurso {
+    position: relative;
+    top: -480px;
+    color: #fff;
+    width: 100%;
+}
+.unidade {
+    border-radius: 4px;
+    border: 1px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+    background: transparent !important;
+    font-size: 12px;
+    color: #57606F;
+    width: 100%;
+    cursor: pointer;
+}
+
+.nameCurso {
+    font-weight: 700;
+    color: #57606F;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+.btnNovo {
+    border-radius: 16px 0px 0px 0px;
+    background: var(--Expand-Palete-US-Grayscale-US-Light-Gray-4-US, #F1F2F6);
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 50px;
+    line-height: 52px;
+    color: var(--Expand-Palete-US-Grayscale-US-Light-Gray-1-US, #A4B0BE);
+    font-family: Ubuntu;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .4s;
+}
+.btnNovo:hover{
+    border-radius: 16px 0px 0px 0px;
+    background: var(--Expand-Palete-US-Grayscale-US-Gray-US, #747D8C);
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 50px;
+    line-height: 52px;
+    color: #fff;
+    font-family: Ubuntu;
+    font-size: 14px;
+    font-style: normal;
+    font-weight:700;
+    cursor: pointer;
+    transition: all .4s;
+}
+.btnNovo.active{
+    border-radius: 16px 0px 0px 0px;
+    background: var(--Expand-Palete-US-Grayscale-US-Gray-US, #747D8C);
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 50px;
+    line-height: 52px;
+    color: #fff;
+    font-family: Ubuntu;
+    font-size: 14px;
+    font-style: normal;
+    font-weight:700;
+    cursor: pointer;
+    transition: all .4s;
+}
+.btnEx {
+    border-radius: 0px 16px 0px 0px;
+    background: var(--Expand-Palete-US-Grayscale-US-Light-Gray-4-US, #F1F2F6);
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 50px;
+    line-height: 52px;
+    color: var(--Expand-Palete-US-Grayscale-US-Light-Gray-1-US, #A4B0BE);
+    font-family: Ubuntu;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .4s;
+}
+.btnEx:hover {
+    border-radius: 0px 16px 0px 0px;
+    background: var(--Expand-Palete-US-Grayscale-US-Gray-US, #747D8C);
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 50px;
+    line-height: 52px;
+    color: #fff;
+    font-family: Ubuntu;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .4s;
+}
+.btnEx.active {
+    border-radius: 0px 16px 0px 0px;
+    background: var(--Expand-Palete-US-Grayscale-US-Gray-US, #747D8C);
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 50px;
+    line-height: 52px;
+    color: #fff;
+    font-family: Ubuntu;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .4s;
+}
+.idCurso {
+    position: absolute;
+    opacity: 0;
+    z-index: -100;
+}
+
+.selecioneError {
+    position: relative;
+    margin: 20px auto -11px auto;
+    text-align: center;
+    font-size: 15px;
+    color: #f00;
+}
+
+.box {
+    position: fixed;
+    display: none;
+    z-index: 9988;
+    right: 10%;
+    top: 16%;
+    background: #dcdcdc;
+    font-family: Ubuntu, sans-serif;
+    max-width: 385px;
+    padding: 30px 30px 30px 30px !important;
+    font-size: 12px;
+    border-radius: 16px !important;
+    /* border: 2px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0); */
+    background: var(--Expand-Palete-US-Grayscale-US-White, #FFF);
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.12);
+    transition: all .8s;
+}
+/* .box.azul {
+    border-top: 8px solid #0F96AE;
+} */
+.box.rosa {
+    border-top: 6px solid #E5457A;
+}
+.box.azul {
+    border-top: 6px solid #0F96AE;
+}
+.box:nth-child(2) {
+    display: block !important;
+}
+.box .entry-title {
+    color: #57606F !important;
+    font-size: 18px;
+    line-height: 18px;
+    text-transform: capitalize !important;
+}
+.dePor {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    color: #57606F;
+    color: var(--Expand-Palete-US-Grayscale-US-Light-Gray-1-US, #A4B0BE);
+    /* leading-trim: both;
+    text-edge: cap; */
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+#valorSDesconto {
+    text-decoration: line-through;
+}
+.valorParcela {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: -5px auto 10px auto;
+    font-size: 35px;
+    font-weight: 800;
+}
+.vezes {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    font-weight: 500;
+}
+.wrapSides {
+    position: relative;
+    margin-top: 18px;
+    color: #57606F;
+}
+/* .wrapSides h3 {
+    color: #0F96AE;
+} */
+.innerBox .left {
+    position: relative;
+    display: inline-block;
+    width: 49%;
+    vertical-align: top;
+}
+.innerBox .right {
+    position: relative;
+    display: inline-block;
+    width: 49%;
+    vertical-align: top;
+}
+.innerBox h3 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 0;
+    color: #57606F;
+}
+.innerBox .conteudoBox {
+    position: relative;
+    margin-bottom: -5px;
+    font-size: 12px;
+}
+.btnComprar {
+    position: relative;
+    background-color: #EF7D00;
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px;
+    margin-top: 20px;
+    width: 100%;
+    border: 5px solid #EF7D00;
+    /* opacity: .5; */
+    cursor: pointer;
+    transition: all .4s;
+}
+.btnComprar:hover {
+    opacity: 1;
+    transition: all .4s;
+}
+.single-featured-image-header {
+    position: relative !important;
+    display: block !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    /* width removed due to invalid value */
+    height: 500px !important;
+    /* background-color: #414141 !important; */
+}
+.single-featured-image-header img {
+    display: none;
+}
+.maisMenos {
+    color: #0F96AE;
+}
+
+
+/* GERAL SECTIONS */
+.comBarra {
+    color: var(--Expand-Palete-US-Grayscale-US-Dark-Gray-2-US, #2F3542);
+    font-family: Ubuntu;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.comBarra:before {
+    position: relative;
+    content: '';
+    border-radius: 8px;
+    background-color: #0F96AE;
+    width: 70px;
+    height: 4px;
+    display: block;
+    top: -17px;
+}
+.bgGrey {
+    position: relative;
+    width: 100%;
+    display: block;
+    background: var(--Expand-Palete-US-Grayscale-US-Light-Gray-4-US, #F1F2F6);
+    padding-bottom: 70px;
+    padding-top: 70px;
+}
+.bgFooter {
+    position: relative;
+    width: 100%;
+    display: block;
+    padding-bottom: 70px;
+    padding-top: 70px;
+    background: #20242D;
+}
+
+/* APRENDER */
+section.aprender {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-top: -400px;
+}
+.textoAprender {
+    color: #414141;
+    font-family: Ubuntu;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px; /* 200% */
+}
+.paraVc {
+    position: relative;
+    color: #414141;
+    /* font-family: Ubuntu; */
+    /* font-size: 18px; */
+    /* font-style: normal; */
+    /* font-weight: 400; */
+    /* line-height: normal; */
+}
+.wrapBlocksPara {
+    position: relative;
+    display: block;
+}
+.wrapBlocksPara li {
+    position: relative;
+    width: 48%;
+    display: inline-block;
+    padding-right: 15px;
+    margin-bottom: 20px;
+    color: #414141;
+    font-family: Ubuntu;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px; /* 200% */
+    list-style: none;
+    vertical-align: top;
+}
+.wrapBlocksPara li::before {
+    content: '';
+    position: absolute;
+    left: -15px; /* Adjust as needed */
+    top: 10px; /* Adjust as needed */
+    width: 5px;
+    height: 5px;
+    background-color: #EF7D00; /* Cor laranja */
+    border-radius: 50%;
+}
+
+/* CURSAR */
+section.cursar {
+    position: relative;
+    display: block;
+    width: 75%;
+    /* padding-bottom: 150px; */
+}
+h2.vaiCursar {
+    margin-bottom: 50px;
+}
+.tagModulo {
+    position: relative;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+.wrapModulo {
+    position: relative;
+    display: block;
+    width: 80%;
+    height: 78px;
+    cursor: pointer;
+    padding-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--Cinza--2, #CED6E0);
+    background: var(--Branco, #FFF);
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+    transition: all .4s;
+}
+.wrapModulo:hover {
+    transition: all .4s;
+    opacity: .8;
+}
+/* .wrapModulo:before {
+    content: '';
+    position: absolute;
+    height: 65px;
+    width: 2px;
+    left: -8px;
+    border-radius: 10px;
+    background: var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+} */
+.titleModulo {
+    /* color: var(--Expand-Palete-US-Grayscale-US-Gray-US, #747D8C); */
+    font-family: Ubuntu;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px; /* 200% */
+    margin-bottom: 5px;
+    margin-bottom: 25px;
+}
+.contentModulo {
+    color: #2F3542;
+    font-family: Ubuntu;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 140% */
+    margin: 5px 0;
+}
+.wrapModulo .contentModulo:nth-child(1) {
+    margin-top: 50px;
+    position: relative;
+}
+.contentModulo:after {
+    content: '';
+}
+.ruleModulo {
+    position: absolute;
+    right: 15px;
+    transition: all .4s;
+}
+.ruleModulo.active {
+    position: absolute;
+    right: 15px;
+    transform: rotate(180deg);
+    transition: all .4s;
+}
+
+/* CAIXAS */
+.caixas {
+    position: relative;
+    margin-top: -70px;
+    width: 70%;
+}
+.caixa {
+    width: 48%;
+    float: left;
+    margin-right: 10px;
+    border-radius: 8px;
+    border: 2px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+    background: var(--Expand-Palete-US-Grayscale-US-Dark-Gray-2-US, #2F3542);
+    color: #fff;
+    padding: 20px;
+    min-height: 370px;
+}
+.caixa .titleBox {
+    color: #fff;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+.caixa .contentBox {
+    color: #fff;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 23px;
+}
+
+/* PARCERIAS */
+.parcerias {
+    position: relative;
+    display: block;
+    width: 70%;
+    padding-top: 0px;
+    padding-bottom: 40px
+}
+.parcerias .contentBox {
+    color: #414141;
+    font-family: Ubuntu;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    width: 93%;
+}
+.wrapParcerias {
+    width: 90%;
+}
+
+.wrapParaAll {
+    position: relative;
+    width: 100%;
+    background-color: #F1F2F6;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.wrapParaAll:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -630px;
+    width: 620%;
+    height: 120%;
+    background-color: #F1F2F6;
+}
+
+.certificacoes-intermediarias:before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -630px;
+    width: 620%;
+    height: 100%;
+    background-color: #F1F2F6;
+}
+
+.bgCoordenacao:before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -630px;
+    width: 620%;
+    height: 100%;
+    background-color: #1E1E1E;
+}
+
+
+
+.formas-ingresso {
+    position: relative;
+    background: #F2F2F2;
+    padding-bottom: 50px;
+  }
+  .forma-ingresso {
+    position: relative;
+    width: 41%;
+    max-width: 360px;
+    height: 100px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 30px;
+  }
+  .forma-ingresso h3 {
+    color: #0F96AE;
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 15px;
+  }
+  .forma-ingresso p {
+    color: #343434;
+    font-family: Ubuntu;
+    font-size: 13px;
+    font-style: normal;
+    width: 81%;
+    font-weight: 400;
+    line-height: 17px; /* 142.857% */
+    margin-top: -5px;
+  }
+  .forma-ingresso.enem {
+    border-radius: 5px;
+    border: 2px solid #0F96AE;
+  }
+   .forma-ingresso.enem h3 {
+    color: #0F96AE;
+   }
+
+  .forma-ingresso.vestibular {
+    border-radius: 5px;
+    border: 2px solid #0F96AE;
+  }
+   .forma-ingresso.vestibular h3 {
+    color: #0F96AE;
+   }
+  .forma-ingresso.segunda-graduacao {
+    border-radius: 5px;
+    border: 2px solid #004071;
+  }
+  .forma-ingresso.segunda-graduacao h3 {
+    color: #004071;
+   }
+  .forma-ingresso.transferencia {
+    border-radius: 5px;
+    border: 2px solid #F58220;
+  }
+  .forma-ingresso.transferencia h3 {
+    color: #F58220;
+   }
+  .forma-ingresso.reabertura {
+    border-radius: 5px;
+    border: 2px solid #EA5B33;
+  }
+  .forma-ingresso.reabertura h3 {
+    color: #EA5B33;
+   }
+  .setaBox {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 5px;
+    top: 26%;
+  }
+  a{
+    transition: all .4s;
+  }
+  a:hover {
+    opacity: .7;
+    transition: all .4s;
+  }
+
+.boxCert {
+    position: relative;
+    margin-right: 20px;
+    float: left;
+    width: 45%;
+    height: 80px;
+    padding-top: 20px;
+    padding-left: 20px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 2px solid  #0F96AE;
+    margin-bottom: 20px;;
+}
+.certType {
+    width: 70%;
+    display: inline-block;
+    position: relative;
+    top: -9px;
+    margin-left: 12px;
+}
+.seloNotaMáxima {
+   bottom: -260px !important;
+}
+
+@media(min-width:1000px) {
+    .site-main {
+        padding-top: 50px;
+    }
+    .box {
+        min-width: 385px;
+    }
+}
+@media(max-width:1250px) {
+    .content-area {
+        width: 90%;
+    }
+    .parcerias .contentBox {
+        width: 90%;
+    }
+}
+@media(max-width:1124px) {
+    .content-area {
+        width: 85%;
+    }
+    .parcerias .contentBox {
+        width: 85%;
+    }
+}
+@media(max-width:1024px) {
+    .content-area {
+        width: 100%;
+    }
+    .box {
+        /* width removed due to invalid value */
+        position: relative;
+        display: none;
+        margin: -500px auto 430px auto;
+        left: auto !important;
+        right: auto !important;
+    }
+    .wrapModulo {
+        width: 100%;
+        float: none;
+        margin-right: 0;
+        min-height: auto;
+        margin-bottom: 10px;
+    }
+    .wrapBlocksPara li {
+        width: 50%;
+    }
+    .single-featured-image-header {
+        height: 710px !important;
+        background-position: 50% 0px !important;
+        background-size: 1010px !important;
+    }
+    #breadcrumbs {
+        font-size: 13px;
+        margin-top: -210px;
+    }
+    .wrapModalidade {
+        margin-top: -60px;
+    }
+    section.cursar {
+        padding-bottom: 40px;
+    }
+    .caixas {
+        width: 100%;
+        margin-top: -100px;
+    }
+    .caixa {
+        width: 100%;
+        float: none;
+        margin-right: auto;
+        min-height: auto;
+    }
+    .wrapParcerias {
+        width: 100%;
+    }
+    .parcerias {
+        width: 100%;
+    }
+}
+
+@media(max-width:600px) {
+    section.aprender {
+        margin-top: -430px;
+        text-align: center;
+    }
+    .comBarra:before {
+        margin: 0 auto;
+        text-align: center;
+    }
+    .wrapBlocksPara li {
+        width: 100%;
+        margin: 0 auto;
+    }
+    section.cursar {
+        width: 100%;
+        text-align: center;
+    }
+    .wrapParaAll {
+        padding-bottom: 30px;
+    }
+    .wrapModulo {
+        text-align: left;
+    }
+    .certificacoes-intermediarias {
+        width: 100%;
+        text-align: center;
+    }
+    .seloCertificacao {
+        width: 100% !important;
+    }
+    .parcerias {
+        text-align: center;
+        width: 100%;
+    }
+    .forma-ingresso {
+        width: 100%;
+        text-align: left;
+    }
+    .centerLateral {
+        text-align: center;
+    }
+    section.VideosBottomDepoimentos {
+        width: 170%;
+    }
+    .QuemRecomendaVideos li a span {
+        display: none;
+    }
+    .QuemRecomendaVideos li a p {
+        display: none;
+    }
+    .QuemRecomendaVideos {
+        height: 140px;
+    }
+    .metodologias {
+        text-align: center;
+    } 
+    .metodologias .left {
+        width: 100% !important;
+    }
+    .matBoxes {
+        width: 100%;
+        display: block;
+        margin-left: auto !important;
+    }
+    .matBoxes .box {
+        width: 100%;
+        display: block;
+        text-align: center;
+        margin: 20px auto;
+    }
+    .wrap-porque {
+        position: relative;
+        text-align: center;
+    }
+    .porque .left {
+        width: 100% !important;
+        margin: 0 auto;
+    }
+    .wrapLineItem {
+        width: 100% !important;
+        display: block;
+    }
+    .seloNotaMáxima {
+        position: relative !important;
+        bottom: 0 !important;
+        width: auto !important;
+        max-width: 350px;
+    }
+    .wrap-bolsas {
+        text-align: center;
+    }
+    .bolsas .left {
+        width: 100% !important;
+    }
+    .bolsas .right {
+        width: 100% !important;
+    }
+    .bolsas .right .coluna {
+        width: 100% !important;
+        text-align: center;
+        height: 180px !important;
+    }
+    .bolsas .right .coluna h3 {
+        max-width: 80% !important;
+        margin: 0 auto !important;
+    }
+
+    .wrap-parceiros {
+        width: 100% !important;
+        text-align: center;
+    }
+    .wrap-parceiros .left {
+        width: 100% !important;
+    }
+
+    .conteudo-certificacoes {
+        width: 100% !important;
+    }
+    .wrapModulo {
+        height: 77px;
+    }
+    .titleModulo {
+        width: 90%
+    }
+    .wrapDocentes {
+        margin: 0 !important; 
+    }
+    /* .single-featured-image-header {
+        background-position: 54% !important;
+    } */
+}
+
+
+
+/* certificações escondidas, por enquanto  */
+.certificacoes .right {
+    display: none !important;
+}
+/* certificações escondidas, por enquanto  */
+
+
+
+/* ajuste footer dentro do graduaçao */
+.footer .wrap {
+    position: relative;
+    width: 100% !important;
+    left: 0 !important;
+    padding: 0 !important;
+}
+.footer:before {
+    content: '';
+    position: absolute;
+    width: 5000px;
+    min-height: 700px;
+    left: -430px;
+    background: #20242D;
+    z-index: 0;
+    margin-top: -40px;
+}
+
+@media(max-width:768px) {
+    .footer {
+        width: 130% !important;
+        left: -30px !important;
+        position: relative;
+    }
+}
+/* ajuste footer dentro do graduaçao */

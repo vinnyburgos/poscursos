@@ -1,0 +1,349 @@
+html,
+body {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: Ubuntu;
+  color: #57606F;
+}
+.clear {
+  clear: both;
+}
+.center {
+  position: relative;
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+}
+.wrapMenuFluxo {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  text-align: center;
+  border-bottom: 2px solid #DFE4EA;
+}
+.wrapMenuFluxo .logoTopo {
+  position: absolute;
+  width: 180px;
+  left: 0;
+}
+.wrapMenuFluxo .wrapStep {
+  position: relative;
+}
+.wrapMenuFluxo .wrapStep img {
+  width: 100%;
+  max-width: 300px;
+}
+.wrapContent {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.wrapContent .left {
+  position: relative;
+  width: 42%;
+  display: inline-block;
+  vertical-align: top;
+}
+.wrapContent .left h3 {
+  font-size: 28px;
+  margin-bottom: 50px;
+}
+.wrapContent .left .btnsConta {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px solid #DFE4EA;
+  font-size: 14px;
+  cursor: pointer;
+}
+.wrapContent .left .btnsConta .btnCriarConta {
+  position: relative;
+  width: 48%;
+  display: inline-block;
+}
+.wrapContent .left .btnsConta .btnCriarConta.active {
+  border-bottom: 3px solid #EF7D00;
+  padding-bottom: 10px;
+  transition: all;
+}
+.wrapContent .left .btnsConta .btnCriarConta:hover {
+  border-bottom: 3px solid #EF7D00;
+  opacity: 0.8;
+  padding-bottom: 10px;
+  transition: all;
+}
+.wrapContent .left .btnsConta .btnJaTenhoConta {
+  position: relative;
+  width: 48%;
+  display: inline-block;
+}
+.wrapContent .left .btnsConta .btnJaTenhoConta.active {
+  border-bottom: 3px solid #EF7D00;
+  padding-bottom: 10px;
+  transition: all;
+}
+.wrapContent .left .btnsConta .btnJaTenhoConta:hover {
+  border-bottom: 3px solid #EF7D00;
+  padding-bottom: 10px;
+  opacity: 0.8;
+  transition: all;
+}
+.wrapContent .left .criarConta {
+  position: relative;
+  display: none;
+}
+.wrapContent .left .criarConta.active {
+  display: block;
+}
+.wrapContent .left .criarConta span {
+  color: var(--Expand-Palete-US-Grayscale-US-Dark-Gray-1-US, #57606F);
+  font-family: Ubuntu;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 24px;
+  /* 150% */
+}
+.wrapContent .left .criarConta .btnGoogle {
+  margin: 0 auto;
+  margin-top: 30px;
+  display: flex;
+  width: 92%;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+  background: var(--Expand-Palete-US-Grayscale-US-Light-Gray-4-US, #F1F2F6);
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.wrapContent .left .criarConta .btnGoogle:hover {
+  opacity: 0.8;
+  transition: all 0.4s;
+}
+.wrapContent .left .criarConta .cadastroEmail {
+  margin-top: 40px;
+  border-top: 2px solid #CED6E0;
+}
+.wrapContent .left .criarConta .cadastroEmail .tituloCadastrar {
+  position: relative;
+  margin: 18px auto;
+  top: -28px;
+  margin-bottom: 0;
+  background-color: #fff;
+  width: 160px;
+}
+.wrapContent .left .criarConta .cadastroEmail .cadastrar {
+  position: relative;
+  display: block;
+}
+.wrapContent .left .criarConta .cadastroEmail .cadastrar input {
+  width: - 6px;
+  margin-bottom: 20px;
+  height: 48px;
+  padding-left: 20px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  border: 1px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+  background: var(--Expand-Palete-US-Grayscale-US-White, #FFF);
+  color: var(--Expand-Palete-US-Grayscale-US-Light-Gray-1-US, #A4B0BE);
+  font-family: Ubuntu;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  /* 150% */
+}
+.wrapContent .left .criarConta .cadastroEmail .cadastrar input.enviar {
+  width: 99%;
+  border-radius: 4px;
+  border: 1px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+  background: var(--Brand-Colors-US-Orange-US-Brand-Orange-US, #EF7D00);
+  color: var(--Expand-Palete-US-Grayscale-US-White, #FFF);
+  font-family: Ubuntu;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  /* 120% */
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.wrapContent .left .criarConta .cadastroEmail .cadastrar input.enviar:hover {
+  opacity: 0.8;
+  transition: all 0.4s;
+}
+.wrapContent .left .jaTenhoConta {
+  position: relative;
+  display: none;
+}
+.wrapContent .left .jaTenhoConta.active {
+  display: block;
+}
+.wrapContent .left .jaTenhoConta .tituloCadastrar {
+  position: relative;
+  margin: 18px auto;
+  top: -28px;
+  margin-bottom: 0;
+  background-color: #fff;
+  width: 140px;
+}
+.wrapContent .left .jaTenhoConta .btnGoogle {
+  margin: 0 auto;
+  margin-top: 30px;
+  display: flex;
+  width: 92%;
+  padding: 16px;
+  justify-content: center;
+  font-weight: 900;
+  align-items: center;
+  gap: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+  background: var(--Expand-Palete-US-Grayscale-US-Light-Gray-4-US, #F1F2F6);
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.wrapContent .left .jaTenhoConta .btnGoogle:hover {
+  opacity: 0.8;
+  transition: all 0.4s;
+}
+.wrapContent .left .jaTenhoConta .entrar {
+  position: relative;
+  display: block;
+}
+.wrapContent .left .jaTenhoConta .entrar input {
+  width: - 6px;
+  margin-bottom: 20px;
+  height: 48px;
+  padding-left: 20px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  border: 1px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+  background: var(--Expand-Palete-US-Grayscale-US-White, #FFF);
+  color: var(--Expand-Palete-US-Grayscale-US-Light-Gray-1-US, #A4B0BE);
+  font-family: Ubuntu;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  /* 150% */
+}
+.wrapContent .left .jaTenhoConta .entrar input.enviar {
+  width: 99%;
+  border-radius: 4px;
+  border: 1px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+  background: var(--Brand-Colors-US-Orange-US-Brand-Orange-US, #EF7D00);
+  color: var(--Expand-Palete-US-Grayscale-US-White, #FFF);
+  font-family: Ubuntu;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  /* 120% */
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.wrapContent .left .jaTenhoConta .entrar input.enviar:hover {
+  opacity: 0.8;
+  transition: all 0.4s;
+}
+.wrapContent .right {
+  position: relative;
+  width: 42%;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 5%;
+  padding-bottom: 18px;
+  margin-top: 5%;
+}
+.wrapContent .right .resumoBox {
+  border-radius: 8px;
+  background: var(--Expand-Palete-US-Grayscale-US-Light-Gray-4-US, #F1F2F6);
+  width: auto;
+  height: auto;
+  flex-shrink: 0;
+  padding: 20px;
+  text-align: left;
+}
+.wrapContent .right .resumoBox .resumoTag {
+  color: var(--Expand-Palete-US-Grayscale-US-Dark-Gray-1-US, #57606F);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  /* 150% */
+}
+.wrapContent .right .resumoBox #nomeCurso {
+  color: var(--Expand-Palete-US-Grayscale-US-Dark-Gray-1-US, #57606F);
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+.wrapContent .right .resumoBox #resumoCurso {
+  color: var(--Expand-Palete-US-Grayscale-US-Dark-Gray-1-US, #57606F);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  /* 160% */
+}
+.wrapContent .right .resumoBox .wrapDetalhesCurso {
+  position: relative;
+  display: block;
+  color: var(--Expand-Palete-US-Grayscale-US-Dark-Gray-1-US, #57606F);
+  font-family: Ubuntu;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px;
+}
+.wrapContent .right .resumoBox .wrapDetalhesCurso span {
+  font-weight: 600;
+}
+.wrapContent .right .resumoBox .dePor {
+  color: var(--Expand-Palete-US-Grayscale-US-Light-Gray-1-US, #A4B0BE);
+  font-family: Ubuntu;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.wrapContent .right .resumoBox .precoCheio {
+  position: relative;
+  color: var(--Expand-Palete-US-Grayscale-US-Light-Gray-1-US, #A4B0BE);
+  top: -34px;
+  left: 25px;
+  text-decoration: line-through;
+}
+.wrapContent .right .resumoBox .por {
+  position: relative;
+  color: var(--Expand-Palete-US-Grayscale-US-Light-Gray-1-US, #A4B0BE);
+  top: -68px;
+  left: 100px;
+}
+.wrapContent .right .resumoBox .precoDesconto {
+  margin-top: -80px;
+  margin-bottom: -5px;
+  color: var(--Expand-Palete-US-Grayscale-US-Dark-Gray-1-US, #57606F);
+  font-family: Ubuntu;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  text-transform: uppercase;
+}
+.cadastroEmail {
+  margin-top: 40px;
+  border-top: 2px solid #CED6E0;
+}

@@ -1,0 +1,346 @@
+html, body {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Ubuntu;
+    color: #57606F;
+}
+.clear {
+    clear: both;
+}
+.center {
+    position: relative;
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.wrapMenuFluxo {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+    border-bottom: 2px solid #DFE4EA;
+    .logoTopo {
+        position: absolute;
+        width: 180px;
+        left: 0;
+    }
+    .wrapStep {
+        position: relative;
+        img {
+            width: 100%;
+            max-width: 300px;
+        }
+    }
+}
+
+.wrapContent {
+    position: relative;
+    display: block;
+    width: 100%;
+    text-align: center;
+    .left {
+        position: relative;
+        width: 42%;
+        display: inline-block;
+        vertical-align: top;
+        h3 {
+            font-size: 28px;
+            margin-bottom: 50px;
+        }
+        .btnsConta {
+            position: relative;
+            display: block;
+            width: 100%;
+            text-align: center;
+            border-bottom: 2px solid #DFE4EA;
+            font-size: 14px;
+            cursor: pointer;
+            .btnCriarConta {
+                position: relative;
+                width: 48%;
+                display: inline-block;
+                &.active {
+                    border-bottom: 3px solid #EF7D00; 
+                    padding-bottom: 10px;
+                    transition: all;
+                }
+                &:hover {
+                    border-bottom: 3px solid #EF7D00; 
+                    opacity: .8;
+                    padding-bottom: 10px;
+                    transition: all;
+                }
+            }
+            .btnJaTenhoConta {
+                position: relative;
+                width: 48%;
+                display: inline-block;
+                &.active {
+                    border-bottom: 3px solid #EF7D00; 
+                    padding-bottom: 10px;
+                    transition: all;
+                }
+                &:hover {
+                    border-bottom: 3px solid #EF7D00; 
+                    border-bottom: 3px solid #EF7D00; 
+                    padding-bottom: 10px;
+                    opacity: .8;
+                    transition: all;
+                }
+            }
+        }
+        .criarConta {
+            position: relative;
+            display: none;
+            &.active {
+                display: block;
+            }
+            span {
+                color: var(--Expand-Palete-US-Grayscale-US-Dark-Gray-1-US, #57606F);
+                font-family: Ubuntu;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 900;
+                line-height: 24px; /* 150% */
+            }
+            .btnGoogle {
+                margin: 0 auto;
+                margin-top: 30px;
+                display: flex;
+                width: 92%;
+                padding: 16px;
+                justify-content: center;
+                align-items: center;
+                gap: 16px;
+                border-radius: 4px;
+                border: 1px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+                background: var(--Expand-Palete-US-Grayscale-US-Light-Gray-4-US, #F1F2F6);
+                cursor: pointer;
+                transition: all .4s;
+                &:hover {
+                    opacity: .8;
+                    transition: all .4s;
+                }
+            }
+            .cadastroEmail {
+                margin-top: 40px;
+                border-top: 2px solid #CED6E0;
+                .tituloCadastrar {
+                    position: relative;
+                    margin: 18px auto;
+                    top: -28px;
+                    margin-bottom: 0;
+                    background-color: #fff;
+                    width: 160px;
+                }
+                .cadastrar {
+                    position: relative;
+                    display: block;
+                    input {
+                        width: - 6px;
+                        margin-bottom: 20px;
+                        height: 48px;
+                        padding-left: 20px;
+                        flex-shrink: 0;
+                        border-radius: 4px;
+                        border: 1px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+                        background: var(--Expand-Palete-US-Grayscale-US-White, #FFF);
+                        color: var(--Expand-Palete-US-Grayscale-US-Light-Gray-1-US, #A4B0BE);
+                        font-family: Ubuntu;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 24px; /* 150% */
+                        &.enviar {
+                            width: 99%;
+                            border-radius: 4px;
+                            border: 1px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+                            background: var(--Brand-Colors-US-Orange-US-Brand-Orange-US, #EF7D00);
+                            color: var(--Expand-Palete-US-Grayscale-US-White, #FFF);
+                            font-family: Ubuntu;
+                            font-size: 20px;
+                            font-style: normal;
+                            font-weight: 700;
+                            line-height: 24px; /* 120% */
+                            cursor: pointer;
+                            transition: all .4s;
+                            &:hover {
+                                opacity: .8;
+                                transition: all .4s;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .jaTenhoConta {
+            position: relative;
+            display: none;
+            &.active {
+                display: block;
+            }
+            .tituloCadastrar {
+                position: relative;
+                margin: 18px auto;
+                top: -28px;
+                margin-bottom: 0;
+                background-color: #fff;
+                width: 140px;
+            }
+            .btnGoogle {
+                margin: 0 auto;
+                margin-top: 30px;
+                display: flex;
+                width: 92%;
+                padding: 16px;
+                justify-content: center;
+                font-weight: 900;
+                align-items: center;
+                gap: 16px;
+                border-radius: 4px;
+                border: 1px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+                background: var(--Expand-Palete-US-Grayscale-US-Light-Gray-4-US, #F1F2F6);
+                cursor: pointer;
+                transition: all .4s;
+                &:hover {
+                    opacity: .8;
+                    transition: all .4s;
+                }
+            }
+
+            .entrar {
+                position: relative;
+                display: block;
+                input {
+                    width: - 6px;
+                    margin-bottom: 20px;
+                    height: 48px;
+                    padding-left: 20px;
+                    flex-shrink: 0;
+                    border-radius: 4px;
+                    border: 1px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+                    background: var(--Expand-Palete-US-Grayscale-US-White, #FFF);
+                    color: var(--Expand-Palete-US-Grayscale-US-Light-Gray-1-US, #A4B0BE);
+                    font-family: Ubuntu;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 24px; /* 150% */
+                    &.enviar {
+                        width: 99%;
+                        border-radius: 4px;
+                        border: 1px solid var(--Expand-Palete-US-Grayscale-US-Light-Gray-2-US, #CED6E0);
+                        background: var(--Brand-Colors-US-Orange-US-Brand-Orange-US, #EF7D00);
+                        color: var(--Expand-Palete-US-Grayscale-US-White, #FFF);
+                        font-family: Ubuntu;
+                        font-size: 20px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 24px; /* 120% */
+                        cursor: pointer;
+                        transition: all .4s;
+                        &:hover {
+                            opacity: .8;
+                            transition: all .4s;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .right {
+        position: relative;
+        width: 42%;
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 5%;
+        padding-bottom: 18px;
+        margin-top: 5%;
+        .resumoBox {
+            border-radius: 8px;
+            background: var(--Expand-Palete-US-Grayscale-US-Light-Gray-4-US, #F1F2F6);
+            width: auto;
+            height: auto;
+            flex-shrink: 0;
+            padding: 20px;
+            text-align: left;
+            .resumoTag {
+                color: var(--Expand-Palete-US-Grayscale-US-Dark-Gray-1-US, #57606F);
+                font-size: 15px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 24px; /* 150% */
+            }
+            #nomeCurso {
+                color: var(--Expand-Palete-US-Grayscale-US-Dark-Gray-1-US, #57606F);
+                font-size: 40px;
+                font-style: normal;
+                font-weight: 900;
+                line-height: normal;
+            }
+            #resumoCurso {
+                color: var(--Expand-Palete-US-Grayscale-US-Dark-Gray-1-US, #57606F);
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 28px; /* 160% */
+            }
+            .wrapDetalhesCurso {
+                position: relative;
+                display: block;
+                color: var(--Expand-Palete-US-Grayscale-US-Dark-Gray-1-US, #57606F);
+                font-family: Ubuntu;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 30px;
+                span {
+                    font-weight: 600;
+                }
+            }
+            .dePor {
+                color: var(--Expand-Palete-US-Grayscale-US-Light-Gray-1-US, #A4B0BE);
+                font-family: Ubuntu;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+            .precoCheio {
+                position: relative;
+                color: var(--Expand-Palete-US-Grayscale-US-Light-Gray-1-US, #A4B0BE);
+                top: -34px;
+                left: 25px;
+                text-decoration: line-through;
+            }
+            .por {
+                position: relative;
+                color: var(--Expand-Palete-US-Grayscale-US-Light-Gray-1-US, #A4B0BE);
+                top: -68px;
+                left: 100px;
+            }
+            .precoDesconto {
+                margin-top: -80px;
+                margin-bottom: -5px;
+                color: var(--Expand-Palete-US-Grayscale-US-Dark-Gray-1-US, #57606F);
+                font-family: Ubuntu;
+                font-size: 48px;
+                font-style: normal;
+                font-weight: 900;
+                line-height: normal;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+.cadastroEmail {
+    margin-top: 40px;
+    border-top: 2px solid #CED6E0;
+}
