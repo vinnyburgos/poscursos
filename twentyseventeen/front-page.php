@@ -2861,12 +2861,7 @@ get_footer();
 				await esperar(180);
 			}
 
-			if (unidadeParam) {
-				await esperarOpcaoCompativel(selectUnidade, unidadeParam, false, 8000);
-				if (selecionarOpcao(selectUnidade, unidadeParam, false)) {
-					dispararChange(selectUnidade);
-				}
-			}
+			// unidade: aplicada em home.js apos popular #unidade (ver aplicarUnidadeDaUrl).
 		}
 
 		if (document.readyState === 'loading') {

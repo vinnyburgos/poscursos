@@ -393,6 +393,79 @@ $(document).scroll(function(){
     removeInfinityBoxes();
 });
 
+function normalizarTextoUnidade(valor) {
+    return (valor || '')
+        .toString()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function opcaoUnidadeCombina(opt, alvoNorm) {
+    if (!opt || !opt.value) {
+        return false;
+    }
+
+    var valueNorm = normalizarTextoUnidade(opt.value);
+    var textNorm = normalizarTextoUnidade(opt.textContent);
+
+    return valueNorm === alvoNorm
+        || textNorm === alvoNorm
+        || valueNorm.includes(alvoNorm)
+        || textNorm.includes(alvoNorm);
+}
+
+function selecionarAreaInteresseTodas() {
+    var areaInteresseSelect = document.getElementById('areaInteresse');
+    if (!areaInteresseSelect) {
+        return false;
+    }
+
+    var opcaoTodas = Array.from(areaInteresseSelect.options || []).find(function(opt) {
+        return normalizarTextoUnidade(opt.textContent) === 'todas' || String(opt.value || '') === '';
+    });
+
+    if (!opcaoTodas) {
+        return false;
+    }
+
+    areaInteresseSelect.value = opcaoTodas.value;
+    areaInteresseSelect.dispatchEvent(new Event('change', { bubbles: true }));
+    return true;
+}
+
+function aplicarUnidadeDaUrl(unidadeSelect) {
+    if (!unidadeSelect || unidadeSelect.dataset.urlUnidadeAplicada === '1') {
+        return false;
+    }
+
+    var params = new URLSearchParams(window.location.search);
+    var unidadeParam = (params.get('unidade') || '').trim();
+    if (!unidadeParam) {
+        return false;
+    }
+
+    selecionarAreaInteresseTodas();
+
+    var alvoNorm = normalizarTextoUnidade(unidadeParam);
+    var opcoes = Array.from(unidadeSelect.options || []);
+
+    for (var i = 0; i < opcoes.length; i++) {
+        if (opcaoUnidadeCombina(opcoes[i], alvoNorm)) {
+            unidadeSelect.value = opcoes[i].value;
+            unidadeSelect.dataset.urlUnidadeAplicada = '1';
+            unidadeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            return true;
+        }
+    }
+
+    return false;
+}
+
+window.aplicarUnidadeDaUrl = aplicarUnidadeDaUrl;
+
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         const boxes = document.querySelectorAll('.box-item');
@@ -428,8 +501,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const unidades = new Set(); // Usamos um Set para evitar duplicatas
 
-        // Iterar pelos boxes e capturar o conteúdo após o elemento "unidades"
         boxes.forEach(box => {
+            box.querySelectorAll('.unidadeContent').forEach(el => {
+                el.textContent.split(/[,|]/).forEach(unidade => {
+                    const trimmedUnidade = unidade.trim();
+                    if (
+                        trimmedUnidade &&
+                        trimmedUnidade.toLowerCase() !== 'webconferência' &&
+                        !trimmedUnidade.toLowerCase().includes('polo')
+                    ) {
+                        unidades.add(trimmedUnidade);
+                    }
+                });
+            });
+
             const unidadeElement = box.querySelector('.unidades'); // Busca o elemento com a classe "unidades"
             if (unidadeElement) {
                 const nextSibling = unidadeElement.nextSibling; // Captura o próximo nó após o elemento "unidades"
@@ -504,6 +589,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             });
         });
+
+        aplicarUnidadeDaUrl(unidadeSelect);
+        document.dispatchEvent(new CustomEvent('homeUnidadeSelectPronto', {
+            detail: { select: unidadeSelect }
+        }));
     }, 4000); // Timeout para garantir que os boxes estejam carregados
 });
 // controle de UNIDADE 
