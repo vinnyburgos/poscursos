@@ -256,9 +256,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	<!-- dados da API  -->
 	<?php
-	if (!isset($_GET['tipo']) || trim((string) $_GET['tipo']) === '') {
-		$_GET['tipo'] = 'graduacao';
-	}
+	// Sempre busca dados do tipo Pós-Graduação; outros tipos são ignorados.
+	$_GET['tipo'] = 'posgraduacao';
 	include 'getAPI_interna.php';
 
 	if (!isset($data) || !is_array($data)) {
@@ -490,7 +489,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		if ($auth_header !== '') {
 			$codigo_escolhido = '';
-			$tipo_escolhido = 'graduacao';
+			$tipo_escolhido = 'posgraduacao';
 
 			$codigos_candidatos = $coletar_codigos_candidatos();
 			$titulo_atual_norm = $normalizar_texto_api(get_the_title($current_post_id));
@@ -525,7 +524,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					$curso_nome_item = isset($curso_item['curso']) ? (string) $curso_item['curso'] : '';
 					$curso_nome_item_norm = $normalizar_texto_api($curso_nome_item);
 
-					if ($codigo_item === '' || $tipo_item_slug === '') {
+					if ($codigo_item === '' || $tipo_item_slug !== 'posgraduacao') {
 						continue;
 					}
 
@@ -546,22 +545,15 @@ document.addEventListener('DOMContentLoaded', function () {
 						$score += 20;
 					}
 
-					if ($tipo_item_slug === 'graduacao') {
-						$score += 10;
-					}
-
 					if ($score > $melhor_score) {
 						$melhor_score = $score;
 						$melhor_curso = $curso_item;
 					}
 				}
 
-				if (is_array($melhor_curso) && !empty($melhor_curso['codigo']) && !empty($melhor_curso['tipo'])) {
+				if (is_array($melhor_curso) && !empty($melhor_curso['codigo'])) {
 					$codigo_escolhido = trim((string) $melhor_curso['codigo']);
-					$tipo_nome = trim((string) $melhor_curso['tipo']);
-					if (!empty($tipo_slug_por_nome[$tipo_nome])) {
-						$tipo_escolhido = $tipo_slug_por_nome[$tipo_nome];
-					}
+					$tipo_escolhido = 'posgraduacao';
 				}
 			}
 
@@ -570,7 +562,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 
 			if ($codigo_escolhido !== '') {
-				$tipos_tentativa = array_values(array_unique(array_merge(array($tipo_escolhido), array_values($tipo_slug_por_nome))));
+				$tipos_tentativa = array('posgraduacao');
 				foreach ($tipos_tentativa as $tipo_tentativa) {
 					$curso_response = wp_remote_get(
 						$api_base_url . '/api/curso/' . rawurlencode($tipo_tentativa) . '/' . rawurlencode($codigo_escolhido),
@@ -809,6 +801,31 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	/*
+	 * [DIGITAL_EAD_PRECO_TEMP_START]
+	 * Override TEMPORARIO de preco para paginas Digital (EaD).
+	 *
+	 * ROLLBACK (voltar 100% API):
+	 *   $digital_ead_preco_temp_ativo = false;
+	 *
+	 * ALTERAR VALOR DA PARCELA (ex.: 99):
+	 *   $digital_ead_preco_temp_parcela = 99.0;
+	 *
+	 * ALTERAR VALOR "DE" / CHEIO (ex.: 2400):
+	 *   $digital_ead_preco_temp_de = 2400.0;
+	 *
+	 * ALTERAR QUANTIDADE DE PARCELAS NO CARD FLUTUANTE:
+	 *   $digital_ead_preco_temp_parcelas_card = 12;
+	 *
+	 * Busque DIGITAL_EAD_PRECO_TEMP neste arquivo para localizar PHP/JS/HTML.
+	 * [DIGITAL_EAD_PRECO_TEMP_END]
+	 */
+	$digital_ead_preco_temp_ativo = true;
+	$digital_ead_preco_temp_parcela = 99.0;
+	$digital_ead_preco_temp_de = 2400.0;
+	$digital_ead_preco_temp_parcelas_card = 12;
+	$eh_pagina_digital_ead_temp = ($page_modalidade_slug === 'digital');
+
+	/*
 	 * REGRA: Nutricao Esportiva (Digital ao Vivo) usa disciplinas da API posgraduacao.
 	 * A pagina continua como graduacao para investimentos/demais dados; apenas
 	 * $data['estrutura']['grupos'] e substituido pelo retorno de tipo=posgraduacao.
@@ -874,89 +891,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
-	/*
-	 * INICIO BLOCO TEMPORARIO: REGRA DE VALOR POR CURSO (ROLLBACK FACIL) FAKE
-	 *
-	 * Objetivo:
-	 * - Forcar os valores dos investimentos para cursos especificos,
-	 *   garantindo exibicao consistente nas paginas individuais.
-	 *
-	 * Cursos e valores:
-	 * - engenharia-estrutural-com-enfase-em-estruturas-de-concreto => 299.00
-	 * - engenharia-estrutural-com-enfase-em-estruturas-metalicas => 299.00
-	 * - gestao-de-obras-civis => 299.00
-	 * - gestao-e-projetos-de-edificacoes-em-bim => 299.00
-	 * - psicologia-organizacional-e-do-trabalho => 199.00
-	 *
-	 * Rollback:
-	 * - Remover todo o conteudo entre:
-	 *   INICIO BLOCO TEMPORARIO: REGRA DE VALOR POR CURSO (ROLLBACK FACIL)
-	 *   FIM BLOCO TEMPORARIO: REGRA DE VALOR POR CURSO (ROLLBACK FACIL)
-	 */
-	$regras_valor_por_slug = array(
-		'engenharia-estrutural-com-enfase-em-estruturas-de-concreto' => 299.00,
-		'engenharia-estrutural-com-enfase-em-estruturas-metalicas' => 299.00,
-		'gestao-de-obras-civis' => 299.00,
-		'gestao-e-projetos-de-edificacoes-em-bim' => 299.00,
-		'psicologia-organizacional-e-do-trabalho' => 199.00,
-	);
-
-	$normalizar_slug_curso_temporario = function($slug) {
-		$slug = strtolower(trim((string) $slug));
-		if ($slug === '') {
-			return '';
-		}
-		$slug = preg_replace('/-(digital|aovivo)$/', '', $slug);
-		return trim((string) $slug);
-	};
-
-	$slug_post_atual = $normalizar_slug_curso_temporario(get_post_field('post_name', (int) $current_post_id));
-	$uri_atual = $_SERVER['REQUEST_URI'] ?? '';
-	$path_atual = is_string($uri_atual) ? (string) wp_parse_url($uri_atual, PHP_URL_PATH) : '';
-	$slug_url_atual = $normalizar_slug_curso_temporario(basename(untrailingslashit($path_atual)));
-
-	$slugs_candidatos = array_values(array_unique(array_filter(array($slug_post_atual, $slug_url_atual), function($valor) {
-		return is_string($valor) && trim($valor) !== '';
-	})));
-
-	$valor_forcado_curso = null;
-	foreach ($slugs_candidatos as $slug_candidato) {
-		if (array_key_exists($slug_candidato, $regras_valor_por_slug)) {
-			$valor_forcado_curso = (float) $regras_valor_por_slug[$slug_candidato];
-			break;
-		}
-	}
-
-	if ($valor_forcado_curso !== null && $valor_forcado_curso > 0) {
-		if (empty($data['investimentos']) || !is_array($data['investimentos'])) {
-			$data['investimentos'] = array(
-				array(
-					'valor' => $valor_forcado_curso,
-					'preco' => $valor_forcado_curso,
-					'mensalidade' => $valor_forcado_curso,
-					'parcelas' => 18,
-					'modalidade' => $modalidade_box_value,
-				),
-			);
-		} else {
-			foreach ($data['investimentos'] as &$investimento_tmp) {
-				if (!is_array($investimento_tmp)) {
-					$investimento_tmp = array();
-				}
-				$investimento_tmp['valor'] = $valor_forcado_curso;
-				$investimento_tmp['preco'] = $valor_forcado_curso;
-				$investimento_tmp['mensalidade'] = $valor_forcado_curso;
-				if (empty($investimento_tmp['parcelas'])) {
-					$investimento_tmp['parcelas'] = 18;
-				}
-				if (empty($investimento_tmp['modalidade'])) {
-					$investimento_tmp['modalidade'] = $modalidade_box_value;
-				}
-			}
-			unset($investimento_tmp);
-		}
-	}
-	/* FIM BLOCO TEMPORARIO: REGRA DE VALOR POR CURSO (ROLLBACK FACIL) FAKE */
 
 	?>
 
@@ -998,6 +932,12 @@ document.addEventListener('DOMContentLoaded', function () {
 		$modalidade = "graduacao";
 		if ($modalidade) {
 			$valorSemDesconto = round($valor_investimento_atual / 0.4, 2);
+			$valor_exibicao_box_parcela = $valor_investimento_atual;
+			$valor_exibicao_box_de = $valorSemDesconto;
+			if ($digital_ead_preco_temp_ativo && $eh_pagina_digital_ead_temp) {
+				$valor_exibicao_box_parcela = $digital_ead_preco_temp_parcela;
+				$valor_exibicao_box_de = $digital_ead_preco_temp_de;
+			}
 			
 		?>
 
@@ -1147,9 +1087,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 				<div class="versaoGlobal">
-					<p class="dePor valorVersaoSemi"><span>R$</span> <span id="valorSDesconto"><?php echo number_format($valorSemDesconto, 2, ',', '.'); ?></span></p>
+					<p class="dePor valorVersaoSemi"><span>R$</span> <span id="valorSDesconto"><?php echo number_format($valor_exibicao_box_de, 2, ',', '.'); ?></span></p>
 					<p class="dePor dePorVersaoSemi" style="margin-bottom: -25px;">A partir de:</p>
-					<p class="valorParcela"><span class="dePorNovo"></span><span>R$</span><span id="valorCDesconto" data-valor-base="<?php echo esc_attr($investimento['valor']); ?>"><?php echo number_format($investimento['valor'], 2, ',', '.'); ?></span><br><span class="ateFinal"> até o Final do curso</span></p>
+					<p class="valorParcela"><span class="dePorNovo"></span><span>R$</span><span id="valorCDesconto" data-valor-base="<?php echo esc_attr($valor_exibicao_box_parcela); ?>"><?php echo number_format($valor_exibicao_box_parcela, 2, ',', '.'); ?></span><br><span class="ateFinal"> até o Final do curso</span></p>
 				</div>
 
 				<script>
@@ -1173,15 +1113,18 @@ document.addEventListener('DOMContentLoaded', function () {
 								modalidadeNormalizada.indexOf('ao vivo') !== -1
 							);
 
-						// Regra fixa para Digital (EaD): mesma regra dos 99 da home.
-						if (modalidadeSlug === 'digital') {
+						// [DIGITAL_EAD_PRECO_TEMP] Mesma regra temporaria do bloco PHP ($digital_ead_preco_temp_*).
+						if (modalidadeSlug === 'digital' && <?php echo $digital_ead_preco_temp_ativo ? 'true' : 'false'; ?>) {
 							var valorCheio = document.getElementById('valorSDesconto');
 							var valorComDesconto = document.getElementById('valorCDesconto');
+							var parcelaTemp = <?php echo wp_json_encode(number_format($digital_ead_preco_temp_parcela, 2, ',', '.')); ?>;
+							var deTemp = <?php echo wp_json_encode(number_format($digital_ead_preco_temp_de, 2, ',', '.')); ?>;
 							if (valorCheio) {
-								valorCheio.textContent = '2.400,00';
+								valorCheio.textContent = deTemp;
 							}
 							if (valorComDesconto) {
-								valorComDesconto.textContent = '99,00';
+								valorComDesconto.textContent = parcelaTemp;
+								valorComDesconto.setAttribute('data-valor-base', String(<?php echo wp_json_encode($digital_ead_preco_temp_parcela); ?>));
 							}
 							return;
 						}
@@ -2160,6 +2103,11 @@ if (!$tem_itens_validos) {
 				}
 				.cursar .wrapModulo + .wrapModulo {
 					margin-top: 10px;
+				}
+				@media(max-width:768px) {
+					.wrapModulo {
+						padding-top: 17px;
+					}
 				}
 			</style>
 
@@ -5759,12 +5707,11 @@ if ($oferta_info_duracao_api === '') {
 	);
 }
 
-if ($oferta_info_duracao_api !== '') {
-	$oferta_info_duracao_api = preg_replace('/\bsemestres?\b/iu', 'meses', $oferta_info_duracao_api);
-}
-
-if ($oferta_info_duracao_api !== '' && preg_match('/^\d+$/', $oferta_info_duracao_api)) {
-	$oferta_info_duracao_api .= ' meses';
+$oferta_info_duracao_api = trim((string) $oferta_info_duracao_api);
+if ($oferta_info_duracao_api !== '' && !preg_match('/\b(mes|semestre|ano|dia)\b/iu', $oferta_info_duracao_api)) {
+	if (preg_match('/^\d+$/', $oferta_info_duracao_api)) {
+		$oferta_info_duracao_api .= ' meses';
+	}
 }
 
 $oferta_info_inicio_api = $buscar_valor_api_info_oferta(
@@ -5944,19 +5891,27 @@ $oferta_info_preco_parcela_api_num = $normalizar_numero_moeda_info_oferta(
 		: ''
 );
 
-if (
-	$oferta_info_preco_parcela_api_num > 0 &&
-	is_array($investimento_card_api) &&
-	!empty($investimento_card_api['parcelas']) &&
-	(int) $investimento_card_api['parcelas'] > 0 &&
-	(int) $investimento_card_api['parcelas'] !== 18
-) {
-	$oferta_info_preco_parcela_api_num = ($oferta_info_preco_parcela_api_num * (int) $investimento_card_api['parcelas']) / 18;
-}
-
 $oferta_info_preco_parcela_api = $oferta_info_preco_parcela_api_num > 0 ? number_format($oferta_info_preco_parcela_api_num, 2, ',', '.') : '';
 
+$parcelas_origem_card_api = 0;
+if (is_array($investimento_card_api) && !empty($investimento_card_api['parcelas'])) {
+	$parcelas_origem_card_api = (int) $investimento_card_api['parcelas'];
+}
+if (
+	$oferta_info_preco_parcela_api_num > 0 &&
+	$parcelas_origem_card_api > 0 &&
+	$parcelas_origem_card_api !== 18
+) {
+	$oferta_info_preco_parcela_api_num = ($oferta_info_preco_parcela_api_num * $parcelas_origem_card_api) / 18;
+	$oferta_info_preco_parcela_api = number_format($oferta_info_preco_parcela_api_num, 2, ',', '.');
+}
+
 $oferta_info_parcelas_api = 18;
+
+$oferta_info_parcela_texto_api = '';
+if ($oferta_info_preco_parcela_api_num > 0) {
+	$oferta_info_parcela_texto_api = '18x de R$ ' . $oferta_info_preco_parcela_api;
+}
 
 $oferta_info_preco_de_api_num = $normalizar_numero_moeda_info_oferta(
 	$buscar_valor_api_info_oferta(
@@ -5994,6 +5949,16 @@ if ($oferta_info_preco_de_api_num <= 0 && $oferta_info_preco_parcela_api_num > 0
 }
 
 $oferta_info_preco_de_api = $oferta_info_preco_de_api_num > 0 ? number_format($oferta_info_preco_de_api_num, 2, ',', '.') : '';
+
+// [DIGITAL_EAD_PRECO_TEMP] Card flutuante: Digital (EaD) usa valores fixos em vez da API.
+if ($digital_ead_preco_temp_ativo && $eh_pagina_digital_ead_temp) {
+	$oferta_info_preco_parcela_api_num = $digital_ead_preco_temp_parcela;
+	$oferta_info_preco_parcela_api = number_format($digital_ead_preco_temp_parcela, 2, ',', '.');
+	$oferta_info_parcelas_api = (int) $digital_ead_preco_temp_parcelas_card;
+	$oferta_info_parcela_texto_api = $oferta_info_parcelas_api . 'x de R$ ' . $oferta_info_preco_parcela_api;
+	$oferta_info_preco_de_api_num = $digital_ead_preco_temp_de;
+	$oferta_info_preco_de_api = number_format($digital_ead_preco_temp_de, 2, ',', '.');
+}
 
 $oferta_info_cupom_api = $buscar_valor_api_info_oferta(
 	$data,
@@ -6089,7 +6054,7 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 	<div class="floatingOfferPrice">
 		<p class="floatingOfferFrom">A partir de:</p>
 		<p class="floatingOfferDe" id="floatingOfferDe">18x de R$000,00</p>
-		<p class="floatingOfferParcela" id="floatingOfferParcela">18x de R$000,00</p>
+		<p class="floatingOfferParcela" id="floatingOfferParcela"><?php echo esc_html($oferta_info_parcela_texto_api !== '' ? $oferta_info_parcela_texto_api : '--'); ?></p>
 		<p class="floatingOfferCartao" id="floatingOfferCartao">no cartão de crédito</p>
 		<p class="floatingOfferCupom" id="floatingOfferCupom">com o cupom 300NAPOS</p>
 	</div>
@@ -6101,7 +6066,7 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 		</div>
 		<div>
 			<h4>Duração:</h4>
-			<p id="floatingOfferDuracao">--</p>
+			<p id="floatingOfferDuracao"><?php echo esc_html($oferta_info_duracao_api !== '' ? $oferta_info_duracao_api : '--'); ?></p>
 		</div>
 		<div>
 			<h4>Início:</h4>
@@ -6319,6 +6284,7 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 		font-size: 13px;
 		color: #2f3b4f;
 		background: #fff;
+		width: 100%;
 	}
 
 	#floatingOfferCard .floatingOfferSelectField select:focus {
@@ -6622,6 +6588,7 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 	var OFERTA_INFO_MODALIDADE_SLUG_API = <?php echo wp_json_encode($oferta_info_modalidade_slug_api); ?>;
 	var OFERTA_INFO_PRECO_DE_API = <?php echo wp_json_encode($oferta_info_preco_de_api); ?>;
 	var OFERTA_INFO_PRECO_PARCELA_API = <?php echo wp_json_encode($oferta_info_preco_parcela_api); ?>;
+	var OFERTA_INFO_PARCELA_TEXTO_API = <?php echo wp_json_encode($oferta_info_parcela_texto_api); ?>;
 	var OFERTA_INFO_PARCELAS_API = <?php echo wp_json_encode($oferta_info_parcelas_api); ?>;
 	var OFERTA_INFO_CUPOM_API = <?php echo wp_json_encode($oferta_info_cupom_api); ?>;
 	var OFERTA_INFO_CTA_URL_API = <?php echo wp_json_encode($oferta_info_cta_url_api); ?>;
@@ -6632,6 +6599,18 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 	var TITULO_PAGINA_PHP = <?php echo wp_json_encode(get_the_title()); ?>;
 	var MODALIDADE_SLUG_PHP = <?php echo wp_json_encode($page_modalidade_slug); ?>;
 	var MODALIDADE_LABEL_PHP = <?php echo wp_json_encode($modalidade_box_value); ?>;
+
+	/*
+	 * [DIGITAL_EAD_PRECO_TEMP_START]
+	 * Espelha $digital_ead_preco_temp_* (PHP acima).
+	 * Busque DIGITAL_EAD_PRECO_TEMP neste arquivo para rollback/ajuste.
+	 * [DIGITAL_EAD_PRECO_TEMP_END]
+	 */
+	var DIGITAL_EAD_PRECO_TEMP_ATIVO = <?php echo !empty($digital_ead_preco_temp_ativo) ? 'true' : 'false'; ?>;
+	var DIGITAL_EAD_PRECO_TEMP_PARCELA = <?php echo wp_json_encode((float) $digital_ead_preco_temp_parcela); ?>;
+	var DIGITAL_EAD_PRECO_TEMP_DE = <?php echo wp_json_encode((float) $digital_ead_preco_temp_de); ?>;
+	var DIGITAL_EAD_PRECO_TEMP_PARCELAS_CARD = <?php echo (int) $digital_ead_preco_temp_parcelas_card; ?>;
+
 	var HUB_ENDPOINT = 'https://api.hsforms.com/submissions/v3/integration/submit/3462868/709c003b-fb18-4cff-beac-fbd2af676bcb';
 	var SAGA_ENDPOINT = <?php echo wp_json_encode($graduacao_send_api_url); ?>;
 	var HUBSPOT_POS_FIELDS = {
@@ -6681,6 +6660,20 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 			return '';
 		}
 		return redirectUrl;
+	}
+
+	function formatarDuracaoExibicao(valor) {
+		var texto = String(valor || '').trim();
+		if (!texto || texto === '--') {
+			return texto || '--';
+		}
+		if (/\b(mes|semestre|ano|dia)\b/i.test(texto)) {
+			return texto;
+		}
+		if (/^\d+$/.test(texto)) {
+			return texto + ' meses';
+		}
+		return texto;
 	}
 
 	function textOf(selector) {
@@ -7452,7 +7445,7 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 		var inicioGridApi = String(OFERTA_INFO_INICIO_API || '').trim();
 		var duracaoEl = document.getElementById('floatingOfferDuracao');
 		if (duracaoEl) {
-			duracaoEl.textContent = duracaoGridApi || '--';
+			duracaoEl.textContent = formatarDuracaoExibicao(duracaoGridApi) || '--';
 		}
 		var inicioEl = document.getElementById('floatingOfferInicio');
 		if (inicioEl) {
@@ -7651,39 +7644,30 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 		}
 
 		var precoDeApiNumero = numeroPorTextoMoeda(OFERTA_INFO_PRECO_DE_API);
-		var precoParcelaApiNumero = numeroPorTextoMoeda(OFERTA_INFO_PRECO_PARCELA_API);
-		var ofertaParcelasApi = Number(OFERTA_INFO_PARCELAS_API) || 18;
-		// Tratar 'digitalaovivo' como presencial: apenas 'digital' usa 12x temporariamente
-		var parcelasApi = (modalidadeNormalizada === 'digital') ? 12 : 18;
+		var parcelasApi = 18;
+		var parcelaTextoApi = String(OFERTA_INFO_PARCELA_TEXTO_API || '').trim();
+		var usarPrecoDigitalEadTemp = modalidadeNormalizada === 'digital' && DIGITAL_EAD_PRECO_TEMP_ATIVO;
 
-		var precoParcelaExibicao = (isFinite(precoParcelaApiNumero) && precoParcelaApiNumero > 0 && ofertaParcelasApi > 0)
-			? (precoParcelaApiNumero * (ofertaParcelasApi / parcelasApi))
-			: NaN;
-
-		var precoDeCalculadoComDesconto60 = (isFinite(precoParcelaExibicao) && precoParcelaExibicao > 0)
-			? (precoParcelaExibicao / 0.4)
-			: NaN;
-
-		// Override temporário para cursos do tipo 'digital'
-		if (modalidadeNormalizada === 'digital') {
-			precoParcelaExibicao = 99.0;
-			precoDeCalculadoComDesconto60 = 2400.0;
+		if (usarPrecoDigitalEadTemp) {
+			parcelasApi = DIGITAL_EAD_PRECO_TEMP_PARCELAS_CARD;
+			parcelaTextoApi = parcelasApi + 'x de ' + formatarMoedaBR(DIGITAL_EAD_PRECO_TEMP_PARCELA);
+			precoDeApiNumero = DIGITAL_EAD_PRECO_TEMP_DE;
 		}
 
 		var deEl = document.getElementById('floatingOfferDe');
 		if (deEl) {
-			var prefixParcelas = (isFinite(parcelasApi) && parcelasApi > 0 && modalidadeNormalizada !== 'digital') ? (parcelasApi + 'x de ') : '';
-			var precoDeFinal = (isFinite(precoDeCalculadoComDesconto60) && precoDeCalculadoComDesconto60 > 0)
-				? precoDeCalculadoComDesconto60
-				: precoDeApiNumero;
-			deEl.textContent = (isFinite(precoDeFinal) && precoDeFinal > 0) ? (prefixParcelas + formatarMoedaBR(precoDeFinal)) : '--';
+			if (usarPrecoDigitalEadTemp) {
+				deEl.textContent = formatarMoedaBR(precoDeApiNumero);
+			} else {
+				deEl.textContent = (isFinite(precoDeApiNumero) && precoDeApiNumero > 0)
+					? (parcelasApi + 'x de ' + formatarMoedaBR(precoDeApiNumero))
+					: '--';
+			}
 		}
 
 		var parcelaEl = document.getElementById('floatingOfferParcela');
 		if (parcelaEl) {
-			parcelaEl.textContent = (isFinite(precoParcelaExibicao) && precoParcelaExibicao > 0)
-				? (parcelasApi + 'x de ' + formatarMoedaBR(precoParcelaExibicao))
-				: '--';
+			parcelaEl.textContent = parcelaTextoApi || '--';
 		}
 
 		var cupomEl = document.getElementById('floatingOfferCupom');

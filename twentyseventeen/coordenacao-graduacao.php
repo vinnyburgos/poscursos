@@ -596,6 +596,14 @@
     .innerDocentes .right span {
       color: #6b6b6b;
     }
+    @media(max-width:768px) {
+      .centerLateral {
+        margin-left: 0 !important;
+      }
+      .wrapVideo {
+        width: 100%;
+      }
+    }
 </style>     
 
 <script>
