@@ -891,7 +891,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
-
 	?>
 
 	<?php
@@ -6042,11 +6041,55 @@ $floating_card_redirect_pos_apos_envio_ativo = true;
 $floating_card_redirect_pos_apos_envio_url = 'https://inscricao.unisuam.edu.br/pos';
 $floating_card_redirect_pos_apos_envio_target = '_self';
 
+$floating_offer_card_class = 'tema-presencial';
+if ($page_modalidade_slug === 'digital') {
+	$floating_offer_card_class = 'tema-digital';
+} elseif ($page_modalidade_slug === 'semipresencial') {
+	$floating_offer_card_class = 'tema-aovivo';
+}
+
+$texto_turma_confirmada_single = '';
+$titulo_curso_turma_confirmada_single = trim((string) $oferta_info_titulo_api);
+if ($titulo_curso_turma_confirmada_single === '') {
+	$titulo_curso_turma_confirmada_single = trim((string) $titulo_pagina_oferta);
+}
+$turmas_confirmadas_entradas_js = array();
+$turmas_confirmadas_temp_ativo_js = false;
+$turmas_confirmadas_helper_carregado = false;
+
+foreach (array(
+	get_stylesheet_directory() . '/turmas-confirmadas-temp.php',
+	get_template_directory() . '/turmas-confirmadas-temp.php',
+) as $turmas_confirmadas_helper_path) {
+	if (is_readable($turmas_confirmadas_helper_path)) {
+		require_once $turmas_confirmadas_helper_path;
+		$turmas_confirmadas_helper_carregado = true;
+		break;
+	}
+}
+
+if ($turmas_confirmadas_helper_carregado && function_exists('home_resolver_texto_turma_confirmada_contexto') && $page_modalidade_slug !== 'digital') {
+	$texto_turma_confirmada_single = home_resolver_texto_turma_confirmada_contexto(
+		array(
+			$oferta_info_titulo_api,
+			$titulo_pagina_oferta,
+			get_the_title($post_id_oferta),
+		),
+		$data,
+		$post_id_oferta
+	);
+}
+
+if ($turmas_confirmadas_helper_carregado && function_exists('home_get_turmas_confirmadas_entradas')) {
+	$turmas_confirmadas_temp_ativo_js = !isset($turmas_confirmadas_temp_ativo) || $turmas_confirmadas_temp_ativo;
+	$turmas_confirmadas_entradas_js = home_get_turmas_confirmadas_entradas();
+}
+
 ?>
 
 <!-- HTML TEMPORARIO: estrutura do card fixo lateral direita -->
 
-<aside id="floatingOfferCard" aria-hidden="true">
+<aside id="floatingOfferCard" class="<?php echo esc_attr($floating_offer_card_class); ?>" aria-hidden="true">
 	<div class="floatingOfferHeader">
 		<h3 id="floatingOfferTitle">Pos-Graduacao Presencial</h3>
 	</div>
@@ -6073,6 +6116,12 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 			<p id="floatingOfferInicio">--</p>
 		</div>
 	</div>
+
+	<?php if ($texto_turma_confirmada_single !== '') : ?>
+	<p class="floatingOfferTurmaConfirmada is-visible" id="floatingOfferTurmaConfirmada" aria-hidden="false" aria-label="<?php echo esc_attr($texto_turma_confirmada_single); ?>"><?php echo esc_html($texto_turma_confirmada_single); ?></p>
+	<?php else : ?>
+	<p class="floatingOfferTurmaConfirmada" id="floatingOfferTurmaConfirmada" aria-hidden="true" hidden></p>
+	<?php endif; ?>
 
 	<div id="floatingOfferSelectors" class="floatingOfferSelectors" aria-live="polite">
 		<label class="floatingOfferSelectField" for="floatingOfferUnidade">
@@ -6252,6 +6301,37 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 		font-size: 14px;
 		line-height: 1.22;
 		color: #586476;
+	}
+
+	/* [TURMAS_CONFIRMADAS_TEMP] 2026-06-25 — tarja entre Início e Unidade no card flutuante */
+	#floatingOfferCard .floatingOfferTurmaConfirmada {
+		display: none;
+		margin: 12px 0 0;
+		padding: 9px 10px;
+		border-radius: 4px;
+		font-family: Ubuntu, sans-serif;
+		font-size: 12px;
+		font-weight: 700;
+		line-height: 1.35;
+		text-align: center;
+		border: 1px solid rgba(15, 150, 174, 0.45);
+		color: #0F96AE;
+		background: rgba(15, 150, 174, 0.1);
+	}
+
+	#floatingOfferCard .floatingOfferTurmaConfirmada.is-visible {
+		display: block;
+	}
+
+	#floatingOfferCard.tema-digital .floatingOfferTurmaConfirmada,
+	#floatingOfferCard.tema-digital .floatingOfferTurmaConfirmada.is-visible {
+		display: none !important;
+	}
+
+	#floatingOfferCard.tema-aovivo .floatingOfferTurmaConfirmada {
+		color: #7D378D;
+		background: rgba(125, 55, 141, 0.1);
+		border-color: rgba(125, 55, 141, 0.45);
 	}
 
 	#floatingOfferCard .floatingOfferSelectors {
@@ -6599,6 +6679,9 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 	var TITULO_PAGINA_PHP = <?php echo wp_json_encode(get_the_title()); ?>;
 	var MODALIDADE_SLUG_PHP = <?php echo wp_json_encode($page_modalidade_slug); ?>;
 	var MODALIDADE_LABEL_PHP = <?php echo wp_json_encode($modalidade_box_value); ?>;
+	var TURMAS_CONFIRMADAS_TEMP_ATIVO = <?php echo !empty($turmas_confirmadas_temp_ativo_js) ? 'true' : 'false'; ?>;
+	var TURMAS_CONFIRMADAS_ENTRADAS = <?php echo wp_json_encode($turmas_confirmadas_entradas_js); ?>;
+	var TITULO_CURSO_TURMA_CONFIRMADA = <?php echo wp_json_encode($titulo_curso_turma_confirmada_single); ?>;
 
 	/*
 	 * [DIGITAL_EAD_PRECO_TEMP_START]
@@ -6637,6 +6720,178 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 	var REDIRECT_POS_APOS_ENVIO_TEMP_ATIVO = <?php echo !empty($floating_card_redirect_pos_apos_envio_ativo) ? 'true' : 'false'; ?>;
 	var REDIRECT_POS_APOS_ENVIO_TEMP_URL = <?php echo wp_json_encode($floating_card_redirect_pos_apos_envio_url ?? ''); ?>;
 	var REDIRECT_POS_APOS_ENVIO_TEMP_TARGET = <?php echo wp_json_encode($floating_card_redirect_pos_apos_envio_target ?? '_self'); ?>;
+
+	function normalizarUnidadeTurmaConfirmada(valor) {
+		return String(valor || '')
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '')
+			.toLowerCase()
+			.replace(/\s+/g, ' ')
+			.trim();
+	}
+
+	function campusContemUnidadeTurma(campusBruto, unidadeConfirmada) {
+		var campusNorm = normalizarUnidadeTurmaConfirmada(campusBruto);
+		var unidadeNorm = normalizarUnidadeTurmaConfirmada(unidadeConfirmada);
+		if (!campusNorm || !unidadeNorm) {
+			return false;
+		}
+		return campusNorm.indexOf(unidadeNorm) !== -1;
+	}
+
+	function normalizarNomeCursoTurmaConfirmada(valor) {
+		return String(valor || '')
+			.replace(/\u00a0/g, ' ')
+			.replace(/&/g, ' e ')
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '')
+			.toLowerCase()
+			.replace(/[^a-z0-9\s]/g, ' ')
+			.replace(/\s+/g, ' ')
+			.trim()
+			.replace(/^(mba em|pos graduacao em|pos em|especializacao em)\s+/, '');
+	}
+
+	function cursosCoincidemTurmaConfirmada(tituloA, tituloB) {
+		var a = normalizarNomeCursoTurmaConfirmada(tituloA);
+		var b = normalizarNomeCursoTurmaConfirmada(tituloB);
+		if (!a || !b) {
+			return false;
+		}
+		if (a === b) {
+			return true;
+		}
+		var aBusca = ' ' + a + ' ';
+		var bBusca = ' ' + b + ' ';
+		return aBusca.indexOf(bBusca) !== -1 || bBusca.indexOf(aBusca) !== -1;
+	}
+
+	function buscarLocaisConfirmadosPorCurso(tituloCurso) {
+		var locais = [];
+		var entradas = Array.isArray(TURMAS_CONFIRMADAS_ENTRADAS) ? TURMAS_CONFIRMADAS_ENTRADAS : [];
+		entradas.forEach(function(entrada) {
+			if (!entrada || typeof entrada !== 'object') {
+				return;
+			}
+			var nomeLista = String(entrada.curso || '').trim();
+			var unidade = String(entrada.unidade || '').trim();
+			if (!nomeLista || !unidade) {
+				return;
+			}
+			if (!cursosCoincidemTurmaConfirmada(tituloCurso, nomeLista)) {
+				return;
+			}
+			if (locais.indexOf(unidade) === -1) {
+				locais.push(unidade);
+			}
+		});
+		return locais;
+	}
+
+	function resolverTextoTurmaConfirmadaCard(tituloCurso, campusBruto) {
+		if (!TURMAS_CONFIRMADAS_TEMP_ATIVO) {
+			return '';
+		}
+
+		var locaisConfirmados = buscarLocaisConfirmadosPorCurso(tituloCurso);
+		if (!locaisConfirmados.length) {
+			return '';
+		}
+
+		campusBruto = String(campusBruto || '').trim();
+		var locaisExibir = [];
+
+		if (campusBruto !== '') {
+			locaisConfirmados.forEach(function(local) {
+				if (campusContemUnidadeTurma(campusBruto, local)) {
+					locaisExibir.push(local);
+				}
+			});
+		}
+
+		if (!locaisExibir.length && locaisConfirmados.length === 1) {
+			locaisExibir = locaisConfirmados.slice();
+		}
+
+		if (!locaisExibir.length) {
+			return '';
+		}
+		if (locaisExibir.length === 1) {
+			return 'Turma confirmada em ' + locaisExibir[0];
+		}
+		return 'Turma confirmada em ' + locaisExibir.join(' e ');
+	}
+
+	function montarCampusTurmaConfirmadaInvestimentos(investimentos) {
+		var unidades = [];
+		(Array.isArray(investimentos) ? investimentos : []).forEach(function(item) {
+			if (!item || typeof item !== 'object') {
+				return;
+			}
+			['unidade', 'unidade_nome', 'unidadeNome', 'campus', 'local', 'polo'].forEach(function(chave) {
+				var valor = item[chave] != null ? String(item[chave]).trim() : '';
+				if (valor && unidades.indexOf(valor) === -1) {
+					unidades.push(valor);
+				}
+			});
+		});
+		return unidades.join(' | ');
+	}
+
+	function obterTituloCursoTurmaConfirmadaCard() {
+		var tituloEl = document.getElementById('floatingOfferTitle');
+		var tituloDom = tituloEl ? String(tituloEl.textContent || tituloEl.innerText || '').trim() : '';
+		var candidatos = [
+			tituloDom,
+			TITULO_CURSO_TURMA_CONFIRMADA,
+			OFERTA_INFO_TITULO_API,
+			TITULO_PAGINA_PHP
+		];
+
+		for (var i = 0; i < candidatos.length; i++) {
+			var candidato = String(candidatos[i] || '').trim();
+			if (candidato) {
+				return candidato;
+			}
+		}
+
+		return '';
+	}
+
+	function atualizarTarjaTurmaConfirmadaCard() {
+		var tarjaEl = document.getElementById('floatingOfferTurmaConfirmada');
+		if (!tarjaEl || !TURMAS_CONFIRMADAS_TEMP_ATIVO || MODALIDADE_SLUG_PHP === 'digital') {
+			return;
+		}
+
+		var tituloCurso = obterTituloCursoTurmaConfirmadaCard();
+		if (!tituloCurso) {
+			return;
+		}
+
+		var campusBruto = '';
+		var selectUnidade = document.getElementById('floatingOfferUnidade');
+		if (selectUnidade && selectUnidade.value) {
+			campusBruto = String(selectUnidade.value).trim();
+		}
+		if (!campusBruto) {
+			var investimentosTurma = typeof obterInvestimentosCardFlutuante === 'function'
+				? obterInvestimentosCardFlutuante()
+				: (Array.isArray(OFERTA_INFO_INVESTIMENTOS_API) ? OFERTA_INFO_INVESTIMENTOS_API : []);
+			campusBruto = montarCampusTurmaConfirmadaInvestimentos(investimentosTurma);
+		}
+
+		var texto = resolverTextoTurmaConfirmadaCard(tituloCurso, campusBruto);
+		if (!texto) {
+			return;
+		}
+
+		tarjaEl.hidden = false;
+		tarjaEl.textContent = texto;
+		tarjaEl.classList.add('is-visible');
+		tarjaEl.setAttribute('aria-hidden', 'false');
+		tarjaEl.setAttribute('aria-label', texto);
+	}
 
 	function obterUrlRedirectPosEnvioCard(form) {
 		if (REDIRECT_POS_APOS_ENVIO_TEMP_ATIVO) {
@@ -7102,6 +7357,10 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 				offerUnidadeInput.value = unidadeSelecionada || '';
 			}
 		}
+
+		if (typeof atualizarTarjaTurmaConfirmadaCard === 'function') {
+			atualizarTarjaTurmaConfirmadaCard();
+		}
 	}
 
 	window.atualizarOfertaIdCardFlutuante = atualizarOfertaIdCardFlutuante;
@@ -7164,6 +7423,7 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 		});
 
 		atualizarOfertaIdCardFlutuante();
+		atualizarTarjaTurmaConfirmadaCard();
 	}
 
 	function toggleForm(card, shouldShow) {
@@ -7687,6 +7947,8 @@ $floating_card_redirect_pos_apos_envio_target = '_self';
 		cta.setAttribute('href', hrefPreferencial || '#');
 		cta.setAttribute('target', targetPreferencial || '_self');
 		cta.setAttribute('rel', 'noopener');
+
+		atualizarTarjaTurmaConfirmadaCard();
 
 		// Espelha a logica do formulario HubSpot da referencia .DadosCurso.
 		var refs = getFormRefs(card);

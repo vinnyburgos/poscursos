@@ -105,17 +105,9 @@ get_header();
 		}
 	}
 
-	// Filtro funcional: se a URL contiver uma modalidade específica, exibe apenas aquela modalidade
+	// Filtro server-side por modalidade: apenas para fluxo MBA+Digital (nao para ?modalidade= na URL).
+	// ?modalidade= pre-seleciona o filtro via JS (aplicarFiltrosViaUrl), sem bloquear outros filtros.
 	$filtrar_modalidade_unica = null;
-	if (isset($_GET['modalidade'])) {
-		$mod = strtolower($_GET['modalidade']);
-		if ($mod === 'semipresencial') {
-			$mod = 'digitalaovivo';
-		}
-		if (in_array($mod, array('digital', 'presencial', 'digitalaovivo'), true)) {
-			$filtrar_modalidade_unica = $mod;
-		}
-	}
 
 	// Detector custom: quando a URL indicar o filtro "MBA+Digital" (via query string ou trecho na URI)
 	// Exemplo de teste: ?filtrar=mba-digital  ou ?mba_digital=1  ou /mba-digital na path
@@ -271,6 +263,17 @@ get_header();
 	}
 
 	$selo_cursos_destaque_normalized = home_get_selo_cursos_destaque_normalized();
+
+	$turmas_confirmadas_helper_paths = array(
+		get_stylesheet_directory() . '/turmas-confirmadas-temp.php',
+		get_template_directory() . '/turmas-confirmadas-temp.php',
+	);
+	foreach ($turmas_confirmadas_helper_paths as $turmas_confirmadas_helper_path) {
+		if (is_readable($turmas_confirmadas_helper_path)) {
+			require_once $turmas_confirmadas_helper_path;
+			break;
+		}
+	}
 ?>
 
 <?php
@@ -436,6 +439,9 @@ get_header();
 						<label for="modalidade" class="modalidade">Modalidade de Ensino</label>
 						<select name="modalidade" id="modalidade">
 							<option value="">Todas</option>
+							<option value="PRESENCIAL">PRESENCIAL</option>
+							<option value="DIGITAL (EAD)">DIGITAL (EAD)</option>
+							<option value="DIGITAL AO VIVO">DIGITAL AO VIVO</option>
 						</select>
 					</div>
 
@@ -795,6 +801,42 @@ get_header();
 			@media (max-width: 767px) {
 				.box-item .box-badge { width: 56px; top: 8px; right: 8px; }
 			}
+
+			/* [TURMAS_CONFIRMADAS_TEMP] 2026-06-25 — tarja entre Duração/Unidades e SAIBA MAIS */
+			.box-item .box-turma-confirmada {
+				display: block;
+				width: calc(100% - 8px);
+				margin: -7px auto 0;
+				padding: 9px 10px;
+				border-radius: 4px;
+				font-family: Ubuntu, sans-serif;
+				font-size: 12px;
+				font-weight: 700;
+				line-height: 1.35;
+				text-align: center;
+				text-transform: uppercase;
+				letter-spacing: 0.01em;
+				border: 1px solid currentColor;
+				background: rgba(255, 255, 255, 0.92);
+			}
+			.box-item .box-turma-confirmada.colorGreen {
+				color: #0F96AE;
+				background: rgba(15, 150, 174, 0.1);
+				border-color: rgba(15, 150, 174, 0.45);
+			}
+			.box-item .box-turma-confirmada.colorRed {
+				color: #E5457A;
+				background: rgba(229, 69, 122, 0.1);
+				border-color: rgba(229, 69, 122, 0.45);
+			}
+			.box-item .box-turma-confirmada.colorPurple {
+				color: #7D378D;
+				background: rgba(125, 55, 141, 0.1);
+				border-color: rgba(125, 55, 141, 0.45);
+			}
+			.box-item:has(.box-turma-confirmada) .innerInscreva {
+				bottom: 4%;
+			}
 		</style>
 
 
@@ -806,15 +848,10 @@ get_header();
 		<?php if (!empty($cursos_para_cards) && is_array($cursos_para_cards)): ?>
 			<?php foreach ($cursos_para_cards as $curso): ?>
 							<?php
-								// Filtro funcional: exibe apenas a modalidade solicitada pela URL (se houver)
+								// Cards: sempre gerados pela regra geral (todos no HTML).
+								// Filtro ?modalidade= atua depois, via JS, apenas escondendo/mostrando.
 								$modalidade_original = $curso['modalidade'] ?? 'Presencial';
 								$modalidade_normalizada = normalizar_modalidade_home($modalidade_original);
-								if ($filtrar_modalidade_unica && $modalidade_normalizada !== $filtrar_modalidade_unica) continue;
-								// Quando ativo, filtrar apenas cursos cujo título contenha 'MBA'
-								if (!empty($filtrar_mba)) {
-									$titulo_curso_tmp = trim((string) ($curso['curso'] ?? $curso['nome'] ?? ''));
-									if (stripos($titulo_curso_tmp, 'mba') === false) continue;
-								}
 								$modalidade = rotulo_modalidade_home($modalidade_original, $modalidade_normalizada);
 							?>
 				<?php
@@ -1218,6 +1255,19 @@ get_header();
 						}
 						?>
 					</div>
+					<?php
+					$texto_turma_confirmada_card = '';
+					if (!empty($turmas_confirmadas_temp_ativo) && !$is_digital) {
+						$campus_turma_bruto = trim((string) ($curso['campus'] ?? ''));
+						$titulo_curso_card = trim((string) ($curso['curso'] ?? $curso['nome'] ?? ''));
+						$texto_turma_confirmada_card = home_resolver_texto_turma_confirmada_card($titulo_curso_card, $campus_turma_bruto);
+					}
+					if ($texto_turma_confirmada_card !== '') :
+					?>
+					<p class="box-turma-confirmada <?php echo esc_attr($colorClass); ?>" aria-label="<?php echo esc_attr($texto_turma_confirmada_card); ?>">
+						<?php echo esc_html($texto_turma_confirmada_card); ?>
+					</p>
+					<?php endif; ?>
 					<div class="innerInscreva">
 						<a href="<?php echo esc_url($permalink_curso); ?>" class="cursoPage">
 							<div id="btnInscreva" class="btnInscreva btn">SAIBA MAIS</div>
@@ -1309,10 +1359,8 @@ get_header();
 				// Exibe os cursos na ordem desejada, com a classe correta na categoriaTop
 				if (!empty($cursos_top)) :
 					foreach ($cursos_top as $curso) :
-							// Filtro funcional: exibe apenas modalidade solicitada
 						$modalidade_top_bruta = $curso['modalidade'];
 						$modalidade_top_normalizada = normalizar_modalidade_home($modalidade_top_bruta);
-						if ($filtrar_modalidade_unica && $modalidade_top_normalizada !== $filtrar_modalidade_unica) continue;
 					if ($curso['id']) {
 						$post = get_post($curso['id']);
 						setup_postdata($post);
@@ -1722,8 +1770,35 @@ get_header();
 				.toString()
 				.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 				.toLowerCase()
+				.replace(/\s+/g, ' ')
 				.trim();
 		};
+
+		function slugModalidadeFiltro(valor) {
+			var base = normalizar(valor);
+			if (base === 'semipresencial' || base === 'webconferencia' || base === 'aovivo' || base === 'digital ao vivo') {
+				return 'digitalaovivo';
+			}
+			if (base === 'ead' || base === 'digital (ead)' || base === 'digital') {
+				return 'digital';
+			}
+			if (base === 'presencial') {
+				return 'presencial';
+			}
+			return base;
+		}
+
+		function modalidadeBoxCombina(box, alvoSlug) {
+			if (!alvoSlug) {
+				return true;
+			}
+			var boxSlug = slugModalidadeFiltro(box.getAttribute('data-modalidade') || '');
+			if (boxSlug && boxSlug === alvoSlug) {
+				return true;
+			}
+			var cat = box.querySelector('.categoria');
+			return cat ? slugModalidadeFiltro(cat.textContent.trim()) === alvoSlug : false;
+		}
 
 		const VALOR_CURSOS_DESTAQUE = 'cursos-destaque';
 		const boxContainer = document.querySelector('.box-container');
@@ -1823,28 +1898,12 @@ get_header();
 		}
 
 
+		// Opções fixas no HTML: nunca recriar o select (evita sumir modalidades com ?modalidade= na URL).
 		function atualizarModalidades() {
-			const modalidadeAtual = modalidade.value;
-			const modalidadesSet = new Set();
-			document.querySelectorAll('.box-item.selecionados').forEach(function(box) {
-				const cat = box.querySelector('.categoria');
-				if (cat) {
-					modalidadesSet.add(cat.textContent.trim());
-				}
-			});
-			modalidade.innerHTML = '<option value="">Todas</option>';
-			modalidadesSet.forEach(function(mod) {
-				const opt = document.createElement('option');
-				opt.value = mod;
-				opt.textContent = mod;
-				modalidade.appendChild(opt);
-			});
-			if (modalidadeAtual && modalidadesSet.has(modalidadeAtual)) {
-				modalidade.value = modalidadeAtual;
-			}
+			return;
 		}
 
-		// Filtro de área de interesse
+		// Filtro de área de interesse — só marca elegibilidade (.selecionados); visibilidade fica no filtrarModalidade.
 		function onAreaInteresseChange(event) {
 			if (event) {
 				event.stopImmediatePropagation();
@@ -1853,7 +1912,6 @@ get_header();
 			const selectedValue = selectedOption ? String(selectedOption.value || '') : '';
 			const isCursosDestaque = selectedValue === VALOR_CURSOS_DESTAQUE;
 			if (isCursosDestaque) {
-				// Comporta-se como "Todas" para modalidade, alterando apenas a ordem dos cards.
 				modalidade.value = '';
 			}
 			const boxes = document.querySelectorAll('.box-item');
@@ -1862,12 +1920,8 @@ get_header();
 				const hasIdMatch = selectedValue !== '' && categoryIds.indexOf(selectedValue) !== -1;
 
 				box.classList.remove('selecionados');
-				box.style.display = 'none';
-
 				if (selectedValue === '' || hasIdMatch || isCursosDestaque) {
 					box.classList.add('selecionados');
-				} else {
-					box.classList.remove('selecionados');
 				}
 			});
 			atualizarVisualAreaInteresseDestaque();
@@ -1882,25 +1936,27 @@ get_header();
 			}, 0);
 		}
 
-		// Filtro de modalidade
+		// Filtro de modalidade — apenas esconde/mostra cards já existentes no DOM (nunca remove).
 		function filtrarModalidade(event) {
 			if (event) {
 				event.stopImmediatePropagation();
 			}
 			const selectedModalidade = modalidade.value;
+			const alvoSlug = selectedModalidade ? slugModalidadeFiltro(selectedModalidade) : '';
 			document.querySelectorAll('.box-item').forEach(function(box) {
 				if (!box.classList.contains('selecionados')) {
 					box.style.display = 'none';
 					return;
 				}
-				const cat = box.querySelector('.categoria');
-				if (!selectedModalidade || (cat && cat.textContent.trim() === selectedModalidade)) {
-					box.style.display = '';
+				if (modalidadeBoxCombina(box, alvoSlug)) {
+					box.style.display = 'inline-block';
 				} else {
 					box.style.display = 'none';
 				}
 			});
 		}
+
+		window.homeReaplicarFiltroModalidade = filtrarModalidade;
 
 		areaInteresse.addEventListener('change', onAreaInteresseChange, true);
 		modalidade.addEventListener('change', filtrarModalidade, true);
@@ -1914,10 +1970,14 @@ get_header();
 			}, true);
 		}
 
-		// Inicializa ao carregar a página
+		// Inicializa: gera/hidrata todos os cards, depois aplica filtros (visibilidade).
 		hidratarCategoriasDosCards();
 		atualizarVisualAreaInteresseDestaque();
 		onAreaInteresseChange();
+
+		window.__homeFiltrosProntos = true;
+		window.__homeTotalCardsGerados = document.querySelectorAll('.box-item').length;
+		document.dispatchEvent(new CustomEvent('homeFiltrosProntos'));
 	});
 	</script>
 
@@ -2829,6 +2889,28 @@ get_footer();
 			});
 		}
 
+		function aguardarFiltrosProntos() {
+			if (window.__homeFiltrosProntos) {
+				return Promise.resolve();
+			}
+
+			return new Promise(function(resolve) {
+				var resolvido = false;
+				var finalizar = function() {
+					if (resolvido) {
+						return;
+					}
+					resolvido = true;
+					document.removeEventListener('homeFiltrosProntos', finalizar);
+					clearTimeout(timer);
+					resolve();
+				};
+
+				document.addEventListener('homeFiltrosProntos', finalizar);
+				var timer = setTimeout(finalizar, 8000);
+			});
+		}
+
 		async function aplicarFiltrosViaUrl() {
 			var params = new URLSearchParams(window.location.search);
 			var areaParam = params.get('area') || '';
@@ -2836,6 +2918,13 @@ get_footer();
 			var unidadeParam = params.get('unidade') || '';
 
 			if (!areaParam && !modalidadeParam && !unidadeParam) {
+				return;
+			}
+
+			await aguardarFiltrosProntos();
+
+			// Garante que todos os cards já foram gerados antes de filtrar pela URL.
+			if (!document.querySelectorAll('.box-item').length && window.__homeTotalCardsGerados === 0) {
 				return;
 			}
 
@@ -2855,8 +2944,14 @@ get_footer();
 			}
 
 			if (modalidadeParam) {
+				await esperarOpcaoCompativel(selectModalidade, modalidadeParam, true, 8000);
 				if (selecionarOpcao(selectModalidade, modalidadeParam, true)) {
-					dispararChange(selectModalidade);
+					// Só esconde/mostra cards existentes — não altera o HTML dos cards.
+					if (typeof window.homeReaplicarFiltroModalidade === 'function') {
+						window.homeReaplicarFiltroModalidade();
+					} else {
+						dispararChange(selectModalidade);
+					}
 				}
 				await esperar(180);
 			}

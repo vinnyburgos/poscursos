@@ -326,35 +326,32 @@ function coresBox() {
 window.onload = function() {
     coresBox();
     
+    function filtrarCardsPorBusca(searchQuery) {
+        var boxItems = document.querySelectorAll('.box-item');
+        var query = (searchQuery || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+        if (query === '') {
+            if (typeof window.homeReaplicarFiltroModalidade === 'function') {
+                window.homeReaplicarFiltroModalidade();
+            }
+            return;
+        }
+
+        boxItems.forEach(function(item) {
+            var title = item.querySelector('.titleBox').textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            item.style.display = title.includes(query) ? 'inline-block' : 'none';
+        });
+    }
+
     // seleção dos cards pelo nome no buscar 
     // versão clicando
     document.getElementById('btnFindCurso').addEventListener('click', function() {
-        var searchQuery = document.getElementById('findCurso').value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        var boxItems = document.querySelectorAll('.box-item');
-        
-        boxItems.forEach(function(item) {
-            var title = item.querySelector('.titleBox').textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-            if (title.includes(searchQuery)) {
-                item.style.display = 'inline-block';
-            } else {
-                item.style.display = 'none';
-            }
-        });
+        filtrarCardsPorBusca(document.getElementById('findCurso').value);
     });
     
     // versão digitando
     document.getElementById('findCurso').addEventListener('input', function() {
-        var searchQuery = this.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        var boxItems = document.querySelectorAll('.box-item');
-        
-        boxItems.forEach(function(item) {
-            var title = item.querySelector('.titleBox').textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-            if (title.includes(searchQuery)) {
-                item.style.display = 'inline-block';
-            } else {
-                item.style.display = 'none';
-            }
-        });
+        filtrarCardsPorBusca(this.value);
     });
 
     function verMais() {
@@ -565,28 +562,29 @@ document.addEventListener('DOMContentLoaded', function () {
         // Filtrar os boxes com base na unidade selecionada
         unidadeSelect.addEventListener('change', () => {
             const selectedUnidade = unidadeSelect.value.toLowerCase().trim();
-            // Filtra apenas os boxes que possuem a classe 'selecionados'
+
+            if (typeof window.homeReaplicarFiltroModalidade === 'function') {
+                window.homeReaplicarFiltroModalidade();
+            }
+
+            if (selectedUnidade === '') {
+                return;
+            }
+
             const selectedBoxes = Array.from(boxes).filter(box => box.classList.contains('selecionados'));
             selectedBoxes.forEach(box => {
-            const apenasPresencialUnidade = box.querySelectorAll('.unidadeContent');
-            let showBox = false;
-            apenasPresencialUnidade.forEach(el => {
-                // Verifica se a unidade selecionada existe em qualquer parte do texto
-                if (el.textContent.toLowerCase().includes(selectedUnidade) && selectedUnidade !== '') {
-                showBox = true;
+                if (box.style.display === 'none') {
+                    return;
                 }
-            });
-            if (selectedUnidade === '') {
-                box.style.display = 'inline-block';
-            } else {
+
+                const apenasPresencialUnidade = box.querySelectorAll('.unidadeContent');
+                let showBox = false;
+                apenasPresencialUnidade.forEach(el => {
+                    if (el.textContent.toLowerCase().includes(selectedUnidade)) {
+                        showBox = true;
+                    }
+                });
                 box.style.display = showBox ? 'inline-block' : 'none';
-            }
-            });
-            // Esconde os boxes que não estão selecionados
-            Array.from(boxes).forEach(box => {
-            if (!box.classList.contains('selecionados')) {
-                box.style.display = 'none';
-            }
             });
         });
 
@@ -808,7 +806,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const areaInteresse = document.getElementById('areaInteresse');
     
     function updateDisableClass() {
-        if (modalidade && modalidade.value === 'Digital (EaD)') {
+        if (modalidade && selectUnidade && modalidade.value === 'DIGITAL (EAD)') {
             selectUnidade.classList.add('disable');
             // Cria uma div transparente por cima do elemento para bloquear interações
             let overlay = selectUnidade.querySelector('.select-unidade-overlay'); 
